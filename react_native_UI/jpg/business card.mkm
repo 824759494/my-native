@@ -1,0 +1,5 @@
+<MKM version="2.0" imageFileUrl="file:///D:/work/react_native_UI/jpg/business%20card.jpg">
+  <Marks>
+    <TextMark defaultDirection="9" direction="9" color="16711680" x="251" y="279" textMaxWidth="100" offsetX="25" offsetY="10" text="这是从chat界面点击加号发送名片后进来的界面；列表里的用户是我关注过的用户；&#xD;"/>
+  </Marks>
+</MKM>

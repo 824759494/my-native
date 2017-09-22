@@ -1,0 +1,7 @@
+<MKM version="2.0" imageFileUrl="file:///D:/work/react_native_UI/jpg/apply.jpg">
+  <Marks>
+    <TextMark defaultDirection="9" direction="9" color="16711680" x="156" y="249" textMaxWidth="273" offsetX="25" offsetY="10" text="我浏览别人的个人信息时有“申请沙发”和“发送消息”两个按钮，点击“申请沙发”跳转到这个页面"/>
+    <TextMark defaultDirection="9" direction="9" color="16711680" x="181" y="608" textMaxWidth="203" offsetX="25" offsetY="10" text="联系方式和留言内容显示在calendar 界面“收到的申请”里面显示"/>
+    <TextMark defaultDirection="9" direction="9" color="16711680" x="283" y="1042" textMaxWidth="100" offsetX="25" offsetY="10" text="点击提示发送成功"/>
+  </Marks>
+</MKM>

@@ -1,0 +1,7 @@
+<MKM version="2.0" imageFileUrl="file:///D:/work/react_native_UI/jpg/prelogin.jpg">
+  <Marks>
+    <TextMark defaultDirection="9" direction="9" color="16711680" x="602" y="1602" textMaxWidth="179" offsetX="99" offsetY="62" text="点击跳转到登录界面"/>
+    <TextMark defaultDirection="5" direction="5" color="16711680" x="408" y="1616" textMaxWidth="165" offsetX="107" offsetY="57" text="点击跳转到注册界面"/>
+    <TextMark defaultDirection="9" direction="9" color="16711680" x="525" y="1517" textMaxWidth="100" offsetX="25" offsetY="10" text="如果已经登录过，直接显示home界面"/>
+  </Marks>
+</MKM>

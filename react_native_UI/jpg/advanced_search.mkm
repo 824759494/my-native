@@ -1,0 +1,9 @@
+<MKM version="2.0" imageFileUrl="file:///D:/work/react_native_UI/jpg/advanced_search.jpg">
+  <Marks>
+    <TextMark defaultDirection="9" direction="9" color="16711680" x="241" y="281" textMaxWidth="100" offsetX="25" offsetY="10" text="点击后改变颜色为红色和蓝色"/>
+    <TextMark defaultDirection="9" direction="9" color="16711680" x="319" y="451" textMaxWidth="100" offsetX="25" offsetY="10" text="点击加减号可以选择数字，大于等于1"/>
+    <TextMark defaultDirection="9" direction="9" color="16711680" x="313" y="723" textMaxWidth="100" offsetX="25" offsetY="10" text="选择后字体颜色变成红色"/>
+    <TextMark defaultDirection="9" direction="9" color="16711680" x="388" y="857" textMaxWidth="100" offsetX="25" offsetY="10" text="确定后筛选出相应的用户"/>
+    <TextMark defaultDirection="9" direction="9" color="16711680" x="220" y="854" textMaxWidth="100" offsetX="25" offsetY="10" text="取消关闭筛选框"/>
+  </Marks>
+</MKM>

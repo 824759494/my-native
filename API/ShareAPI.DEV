@@ -1,0 +1,154 @@
+<?php
+//分享api说明
+// 调用格式：host+'/index.php/Share/'+调用接口名称（API）+API参数列表（如：getShare($owernid,$shareid)=>getShare?owernid=122&shareid=11）
+ // Share对应ShareController后台控制类 调用接口名称（API）对应ShareController里面的函数
+class ShareController{
+	/* 
+	*获取分享评论数据
+	*Request Method:GET
+	*@owernid 用户uid
+	*@id shareid
+	*@start 分页加载数据第一个评论数据索引，默认0
+	*@pageSize 分页加载数据长度，默认20
+	*@return：
+	*{'status'=>$status,'data'=>$data,'num'=>$num}
+	*$status=0、1或者2 0成功 1没数据记录 2数据操作出错
+	*$data：评论数据列表
+	*[{
+	*	'sendernickname':发送评论的用户nickname,
+	*	'senderAccount'：发送评论的用户account,
+	*	'senderid'：发送者uid,
+	*	'owernid'：发布本条分享的用户uid,
+	*	'shareid'：评论的本条分享的id,
+	*	'parentid'：父评论的id（commentid）,
+	*	'deep'：评论深度相对应 0开始,
+	*	'status'：是否阅读消息 0未读 1读取,
+	*	'commentid':评论消息id,
+	*	'receiverid'：上一条评论（父级评论）发送者的uid,
+	*	'receivernickname'：上一条评论（父级评论）发送者的nickname,
+	*	'receiverAccount'：上一条评论（父级评论）发送者的account,
+	*	'content':评论内容,
+	*	'time'：评论时间（unix时间戳 单位秒）,
+	*	'senderHeadImg':{//发送者的头像
+	*		'path':图片存储路径,
+	*		'name'：图片名称
+	*		}
+	*  },{...},...]
+	*$num 评论列表数据总数
+	*/
+	public function getShareComment($owernid,$id,$start=0,$pageSize=20);
+	
+	/* 
+	*添加（发送/回复）对分享的评论
+	*Request Method:POST
+	*@POST json数据结构：
+	*$_POST ['from_id']：发送评论的用户的uid
+	*$_POST	['to_id']：父级评论的发送者的uid
+	*$_POST	['content']：评论内容
+	*$_POST	['owern_id']：评论的对象的拥有者（用户）的uid（发送本条分享的用户的uid）
+	*$_POST	['commentObj_id']：评论的对象的id（本次评论的分享的shareid）
+	*$_POST	['parent_id']：父级评论的评论id（commentid）
+	*$_POST	['deep']：评论的深度
+	*return :
+	*{'status':0、1、2或者3,'id':返回的本次评论的id}
+	*status=0 成功 id=实际数据库中的消息id
+	*status=1 数据操作失败 id=null
+	*status=2 未登录，不能评论 id=null
+	*/
+	public  function addShareComment();
+	
+	
+	/* 
+	*删除 分享的评论
+	*Request Method:POST
+	*@owernid 发布当前分享的用户uid
+	*@shareid 当前分享的id
+	*@commentid 要删除的评论的id
+	*return :
+	*{'status':0、1、2}
+	*status=0 成功 
+	*status=1 数据操作失败 id=null
+	*status=2 未登录，不能评论 id=null
+	*/
+	public function delShareComment();
+	
+	/* 
+	*点赞或者取消点赞
+	*Request Method:POST
+	*@owernid 发布当前分享的用户uid
+	*@shareid 当前分享的id
+	*return :
+	*{'status':0、1、2,3,4}
+	*status=0 取消点赞成功
+	*status=1 取消点赞失败
+	*status=2 点赞成功
+	*status=3 点赞失败
+	*status=4 未登录
+	*/
+	public function praiseShare($owernid,$shareid);
+	
+	/* 
+	*获取分享列表
+	*Request Method:GET
+	*@id 要获取的分享列表的拥有者用户id
+	*@start 分批加载加载数据第一个数据的索引，默认0
+	*@pageSize 分配加载的数据长度 默认20
+	*@return:{'status'=>$status,'num'=>$num,'list'=>$data}
+	*'status'=>0成功获取 1没有记录数据 2数据操作失败
+	*'lsit'=>[{
+	*'owern_id'：分享发送者uid,
+	*'id'：分享id,
+	*'content'：分享内容,
+	*'cnum'：评论次数,
+	*'pnum'：点赞次数,
+	*'time'：分享发送时间,
+	*'nickname'：分享发送者nickname,
+	*’account'：分享发送者account,
+	*'headimg':{//分享发送者的图像
+	*	'path':图片路径,
+	*	'name':图片名称},
+	*'hadpraise':登陆用户是否已经对本条分享点赞，未登录的访客没有这个字段数据,
+	*'shareImg':[{
+	*	'path':图片路径,
+	*	'name':图片名称},{..},...]
+	*},...]
+	*/
+	public function getShare($id,$start=0,$pageSize=20);
+	
+	/* 
+	*添加（发布）分享内容
+	*Request Method:POST
+	*POST['content']：分享内容
+	*POST['num']：分享图片数量
+	*POST['pics']:[图片id数组]
+	*return：
+	*{'status'=>0、1或者2,'id':分享id}
+	*status=0成功 1数据操作失败 2未登录
+	*/
+	public function addShare();
+	
+	/* 
+	*添加分享图片
+	*Request Method:POST
+	*使用uploadify插件上传图片
+	*@return：
+	*status=0时{'status'=>0,'imgs'=>[返回的上传图片数据库信息数组 图片数据结构参考注释 1]}，成功
+	*status=1 未登录 status=2 上传操作失败 status=3 数据库操作错误 
+	*{'status'=>1、2或者3,'error'=>错误消息}
+	*/
+	public  function addShareImg();
+}
+ /****************************************************************************************************************************************
+ 注释：
+1。 {
+		'owern_id':图片拥有者的uid
+		'albumid':相册名id（这里不需要理会）
+		'catname':相册名称（不需要理会）
+		'savename':图片名称
+		'savepath':图片存储路径
+		'create_time':创建时间（unix时间戳）
+		'thumbnames':缩略图名称集合（不需要理会）
+		'id':图片存储id
+	}
+***********************************************************************************************************************************************/
+ 

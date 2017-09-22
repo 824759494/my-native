@@ -1,0 +1,10 @@
+<MKM version="2.0" imageFileUrl="file:///D:/work/react_native_UI/jpg/profile(viewer).jpg">
+  <Marks>
+    <TextMark defaultDirection="9" direction="9" color="16711680" x="187" y="337" textMaxWidth="100" offsetX="25" offsetY="10" text="这个界面是别人看到的我的信息界面"/>
+    <TextMark defaultDirection="9" direction="5" color="16711680" x="549" y="487" textMaxWidth="100" offsetX="25" offsetY="10" text="点击关注有，文本变为“已关注”"/>
+    <TextMark defaultDirection="9" direction="5" color="16711680" x="538" y="591" textMaxWidth="100" offsetX="25" offsetY="10" text="点击跳转到impression  界面，如果没有印象，这里不显示“查看” "/>
+    <TextMark defaultDirection="9" direction="9" color="16711680" x="181" y="720" textMaxWidth="100" offsetX="25" offsetY="10" text="点击跳转到apply 界面"/>
+    <TextMark defaultDirection="9" direction="9" color="16711680" x="381" y="727" textMaxWidth="100" offsetX="25" offsetY="10" text="点击跳转到chat   界面"/>
+    <TextMark defaultDirection="9" direction="9" color="16711680" x="248" y="874" textMaxWidth="100" offsetX="25" offsetY="10" text="因为是第三人看到的我的信息，所以以下资料都不可以编辑"/>
+  </Marks>
+</MKM>

@@ -1,0 +1,6 @@
+<MKM version="2.0" imageFileUrl="file:///D:/work/react_native_UI/jpg/fllow.jpg">
+  <Marks>
+    <TextMark defaultDirection="9" direction="9" color="16711680" x="220" y="49" textMaxWidth="384" offsetX="25" offsetY="10" text="这个界面是从msg 界面右上角的关注进来的，当前状态为粉丝，当点击关注时，关注和粉丝的背景颜色和字体颜色对换。"/>
+    <TextMark defaultDirection="9" direction="9" color="16711680" x="197" y="323" textMaxWidth="100" offsetX="25" offsetY="10" text="点击进入他的个人信息界面"/>
+  </Marks>
+</MKM>

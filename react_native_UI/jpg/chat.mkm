@@ -1,0 +1,5 @@
+<MKM version="2.0" imageFileUrl="file:///D:/work/react_native_UI/jpg/chat.jpg">
+  <Marks>
+    <TextMark defaultDirection="9" direction="9" color="16711680" x="195" y="330" textMaxWidth="286" offsetX="25" offsetY="10" text="这是聊天界面，当点击profile(viewer) 界面里发送消息，也跳转到这个界面，如果从profile(viewer) 来到这个界面，那么点击左上角的返回按钮返回的是profile(viewer) 界面，如果是从home界面的消息进入msg界面再进来的，点击左上角的返回按钮返回的是msg界面。"/>
+  </Marks>
+</MKM>

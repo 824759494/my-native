@@ -1,0 +1,143 @@
+<?php
+/* 
+*@description:
+*this file contain a class for album object controller,this controller class provide function to cache data and get album data
+*@author:Jenson Wong
+*@date:12.23.2015 pm 9:14
+*@copyright:Excouch Techno. Team
+*/
+class	AlbumController	extends	CommonController{
+	/* 
+	*获取相册列表
+	*$owernid 用户id
+	*$start 分批加载开始索引
+	*$pageSize 分批加载数组长度
+	*return:
+	*{
+	*	'status':0-成功 1-没有相册 2-数据操作失败 ,
+	*	'num':用户拥有的相册总数量,
+	*	'list':相册数组 相册元素如下 album
+	*}
+	*album:
+	*{
+	*	'owern_id':用户id,
+	*	'albumid':相册id,
+	*	'albumname':相册名称,
+	*	'description':相册描述,
+	*	'coverimgid':封面照片id,
+	*	'savename':封面照片名称,
+	*	'savepath':封面照片存储路径,
+	*	'imagenum':照片数目
+	*}
+	*/
+	public function getAlbumList($owernid,$start=0,$pageSize=20);
+	/* 
+	*获取相册图片列表
+	*$owernid 用户id
+	*$albumid 相册id
+	*$start 分批加载开始索引
+	*$pageSize 分批加载数组长度
+	*return:
+	*{
+	*	'status':0-成功 1-没有相册 2-数据操作失败 ,
+	*	'num':用户拥有的相册总数量,
+	*	'list':相册照片数组 照片元素 photo
+	*}
+	*photo：{
+	*	'id':照片id,'savepath':存储路径,'create_time':上传时间,'savename':名称	
+	*}
+	*/
+	public function getAlbumImageList($owernid,$albumid,$start=0,$pageSize=20);
+	
+	/* 
+	*创建相册
+	*@name 相册名
+	*@description 相册描述
+	*return 
+	*{
+	*	'status':状态 0：创建成功1：创建失败 2：已经存在相同名字的相册 3：掉线 4：未登录,
+	*	'data':{
+	*		'owern_id':,
+	*		'albumid':,
+	*		'albumname':,
+	*		'description':
+	*	}
+	*}
+	*/
+	public function createAlbum();
+	
+	/* 
+	*修改相册信息
+	*@albumid 相册id
+	*@name 相册名
+	*@description 相册描述
+	*return 
+	*{
+	*	'status':状态
+	*	0：成功更新
+	* 	1：没有对应的相册
+	* 	2：传输的信息为空
+	* 	3：更新操作失败
+	* 	4：掉线
+	* 	5：未登录
+	*}
+	*/
+	public function changeAlbumInfo($albumid,$name,$description=null);
+	/* 
+	*删除相册
+	*@albumid 相册id
+	*return ['status':状态]
+	* 0：成功删除
+	* 1：删除操作失败
+	* 2：未登录
+	*/
+	public function removeAlbum($albumid);
+	
+	/* 
+	*添加图片上传到相册
+	*@albumid 相册id
+	*@cat 相册名
+	*使用uploadify插件上传图片
+	*@return：{'status'=>操作状态,'imgs'=>[返回的上传图片数据库信息数组]}
+	*status=0时 成功
+	*imgs[]['owern_id'] 用户id
+	*imgs[]['albumid'] 相册id
+	*imgs[]['catname'] 相册名称
+	*imgs[]['savename'] 图片名称
+	*imgs[]['savepath'] 图片存储路径
+	*imgs[]['create_time'] 图片上传时间
+	*imgs[]['id'] 图片id
+	*status=1 未登录 status=2 上传操作失败 status=3 数据库操作错误 
+	*{'status'=>1、2或者3,'error'=>错误消息}
+	*/
+	public function addAlbumImage($albumid,$cat='');
+	
+	/* 
+	*删除相册图片
+	*@albumid 相册id
+	*@return：{'status'=>操作状态}
+	*status=0 成功
+	*status=1 数据库没有图片 status=2  数据库操作错误  status=3图片删除出错 status=4 掉线
+	*/
+	public function reomveAlbumImage($albumid,$imageid);
+	
+	/* 
+	*获取相册名册列表
+	*@owernid 用户id
+	*@return：
+	*status=0时{'status'=>0,'list'=>[{albumid,albumname},{...},...]}，成功
+	*status=1 数据库没有数据 status=2  数据库操作错误  
+	*/	
+	public function getAlbumNameList($owernid);
+	
+	/* 
+	*保存上传图片
+	*$albumid 相册id
+	*return:
+	*{
+	*	'status':操作状态 0-成功 1-没登录 2-没数据 3-操作失败
+	*}
+	*/
+	public function uploadImageConfirm($albumid);
+}
+?>

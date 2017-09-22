@@ -1,0 +1,6 @@
+<MKM version="2.0" imageFileUrl="file:///D:/work/react_native_UI/jpg/share.jpg">
+  <Marks>
+    <TextMark defaultDirection="9" direction="9" color="16711680" x="129" y="338" textMaxWidth="388" offsetX="25" offsetY="10" text="这个界面可以从home的发现——discover进入，也可以从profile——分享进入"/>
+    <TextMark defaultDirection="9" direction="9" color="16711680" x="159" y="1054" textMaxWidth="100" offsetX="25" offsetY="10" text="点击评论手出现这个对话框"/>
+  </Marks>
+</MKM>

@@ -1,0 +1,40 @@
+<?php
+//粉丝api说明
+/* 调用格式：host+'/index.php/FansSys/'+调用接口名称（API）+API参数列表
+FansSys对应FansSysController后台控制类 调用接口名称（API）对应FansSysController里面的函数 */
+class FansSysController extends CommonController{
+	/* 
+	*获取粉丝列表
+	*@owernid 要获取粉丝列表对象的用户id
+	*@start 分页参数
+	*@pageSize 分页尺寸
+	*return：{"status":状态code,"num":粉丝数量,"list":列表 数组元素参考注释（1）}
+	*status: 0成功 1没有数据 2数据错误
+	*/
+	public function getFans($owernid,$start=0,$pageSize=20)
+	/* 
+	*获取用户的关注列表
+	*@owernid 要获取的关注列表对象的用户id
+	*@start 分页参数
+	*@pageSize 分页尺寸
+	*return：{"status":状态code,"num":关注数量,"list":列表 数组元素参考注释（1）}
+	*status: 0成功 1没有数据 2数据错误
+	*/
+	public function getFollows($visiterid,$start=0,$pageSize=20)
+	/* 
+	*关注与取消关注
+	*@owernid 关注对象的用户id（登陆用户操作自己的关注对象）
+	*return：{"status":状态}
+	*status :1 取消关注成功 2 取消关注失败 3 sql操作错误 4 关注成功
+	*/
+	public function follow($owernid)
+}
+/*****************************************************************************************
+注释：
+（1）{
+		"uid":用户id,"account":用户账号,"time":关注（或者被关注）时间,"nickname":昵称,
+		'head':{
+			'img_id':图片id,"type":头像是否为默认 0-默认 1-自定义,"savepath":存储路径,"savename":图片名称
+			}
+	}
+?>

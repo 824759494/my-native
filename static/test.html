@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>视频加载</title>
+</head>
+<body>
+    <div id="container">
+
+    </div>
+    <div class="msg"></div>
+</body>
+<script src="./html5media.min.js"></script>
+<script>
+    var eTool = (function (doc) {
+        var cw = window.innerWidth;
+        var ch = window.innerHeight;
+        var _this,_base64Datas = [];
+        this.initConfig = function(options,callbck){
+            this.width = options && options.width ?  options.width : cw;
+            this.height = options && options.height ?  options.height : ch;
+            this.el = options && options.el ?  options.el : "container";
+            this.show = options && options.show ?  options.show : true; //是否显示canvas
+            this.src = options && options.src ?  options.src : 'HZ.mp4'; //播放源
+            this.volume = options && options.volume ?  options.volume : '0'; //默认的声音
+            this.autoplay = options && options.autoplay ?  options.autoplay : 'autoplay'; //是否自动播放
+            this.playbackRate = options && options.playbackRate ?  options.playbackRate : '1.2'; //播放速度
+            this.framerate = options && options.framerate ?  options.framerate : 10; //每秒多少帧
+            this.duration = options && options.duration ?  options.duration : 15;//视频限制的长度
+            this.timer = parseInt(1000 / this.framerate); //时间根据帧来控制
+            this.quality = options && options.quality ?  options.quality : 0.92;//图片的质量
+            this.isbase64 = options && options.isbase64 ?  options.isbase64 : true;//是否返回base64
+            this.vquality = options && options.vquality ?  options.vquality : true;//视频的质量处理
+            this.vqval = options && options.vqval ?  options.vqval : 10;//视频的质量处理   力度 没几个像素点删除一个
+            this._callback = callbck && callbck.constructor === Function ? callbck : function(val){}; //回调用于传递生成的数据给用户
+            _this = this;
+            viewCanvas();
+        }
+
+        function viewCanvas(){
+            var cont = doc.getElementById(_this.el);
+            var canvas = document.createElement('canvas');
+            canvas.width = _this.width;
+            canvas.height = _this.height;
+            if(_this.show){
+                cont.appendChild(canvas);
+            }
+            var cont2D = canvas.getContext("2d");
+            var video = document.createElement('video');
+            video.preload = "auto";
+            video.volume = _this.volume;
+            video.setAttribute('x-webkit-airplay', true);
+            video.setAttribute('webkit-playsinline', true);
+            video.setAttribute('webkit-playsinline', 'webkit-playsinline');
+            video.src = _this.src;
+            video.autoplay = _this.autoplay ; //是自动播放
+            //cont.appendChild(video);
+            var ua = navigator.userAgent;
+            console.log(ua)
+            if(ua.indexOf("iPhone") > 0 || ua.indexOf("Android") > 0){
+                video.play();
+            }
+            video.addEventListener("play", function () {
+                console.log(video.duration,_this.duration)
+                if(video.duration > _this.duration){
+                    _this._callback({
+                        msg:"视频时间超过" + _this.duration + "s"
+                    });
+                    video.pause();
+                    return false;
+                }
+                draw(this, canvas, cont2D,  _this.width,  _this.height);
+            }, false);
+        }
+        
+
+        function cerateCanvas(w, h) {
+            var cr = doc.createElement("canvas");
+            cr.width = w;
+            cr.height = h;
+            return cr;
+        }
+
+        var _timer = 0,stop;
+        function draw(v, c, c2, w, h) {
+            _timer++;
+            if(_timer <= _this.timer){
+                draw(v, c, c2, w, h);
+                return false;
+            }
+            _timer = 0;
+            if (v.paused || v.ended) {
+                cancelAnimationFrame(stop);
+                _this._callback(_base64Datas);
+                return false;
+            }
+            c2.clearRect(0,0,w,h);
+            c2.drawImage(v, 0, 0, w, h);
+            //进行视频图像的处理
+            if(_this.vquality){
+                var _imageData = c2.getImageData(0,0,w,h);
+                //c2.clearRect(0,0,w,h);
+                var _tempData = Array.from(_imageData.data);
+                for (var i = 0,n = -1;i<_tempData.length;i+=4){
+                    n++;
+                    if(n / _this.vqval === 0){
+                        _tempData.splice(i,4);
+                        continue;
+                    }
+                }
+                _imageData.data = Uint8ClampedArray.from(_tempData);
+                c2.putImageData(_imageData,w,h);
+            }
+            if(_this.isbase64){
+                _base64Datas.push(c.toDataURL("image/jpeg",_this.quality));
+            }
+            stop = requestAnimationFrame(function () {
+                draw(v, c, c2, w, h);
+            });
+        }
+
+        return {init:initConfig}
+
+    })(document)
+
+    eTool.init({
+        width:480,
+        height:320,
+        duration:65
+    },function(imgs){
+        console.log(imgs)
+        document.querySelector(".msg").innerHTML = JSON.stringify(imgs);
+    });
+</script>
+</html>

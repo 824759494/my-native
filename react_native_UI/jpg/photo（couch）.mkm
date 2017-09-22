@@ -1,0 +1,5 @@
+<MKM version="2.0" imageFileUrl="file:///D:/work/react_native_UI/jpg/photo%ef%bc%88couch%ef%bc%89.jpg">
+  <Marks>
+    <TextMark defaultDirection="9" direction="9" color="16711680" x="139" y="156" textMaxWidth="456" offsetX="25" offsetY="10" text="这个界面可以从profile(viewer)  里面的沙发信息喜-沙发照片进来，也可以从profile(my)  里面的沙发信息里-沙发信息进入。&#xD;这只是缩略图，点击图片查看大图，但是header要保留，不然不能返回了"/>
+  </Marks>
+</MKM>

@@ -1,0 +1,12 @@
+<MKM version="2.0" imageFileUrl="file:///D:/work/react_native_UI/jpg/profile(my2).jpg">
+  <Marks>
+    <TextMark defaultDirection="9" direction="9" color="16711680" x="320" y="884" textMaxWidth="100" offsetX="25" offsetY="10" text="点击跳转到share 界面"/>
+    <TextMark defaultDirection="9" direction="9" color="16711680" x="157" y="1007" textMaxWidth="100" offsetX="25" offsetY="10" text="当只有一张图时，显示完整的图片"/>
+    <TextMark defaultDirection="9" direction="9" color="16711680" x="477" y="897" textMaxWidth="100" offsetX="25" offsetY="10" text="点击也跳转到share 界面"/>
+    <TextMark defaultDirection="9" direction="9" color="16711680" x="145" y="1193" textMaxWidth="100" offsetX="25" offsetY="10" text="这是两张图的效果"/>
+    <TextMark defaultDirection="9" direction="9" color="16711680" x="133" y="1349" textMaxWidth="100" offsetX="25" offsetY="10" text="这是三张图的效果"/>
+    <TextMark defaultDirection="9" direction="9" color="16711680" x="141" y="1528" textMaxWidth="223" offsetX="25" offsetY="10" text="这是四张图的效果，如果能加入面部识别就更好了，使人像永远位于模块的正中央"/>
+    <TextMark defaultDirection="9" direction="9" color="16711680" x="131" y="852" textMaxWidth="100" offsetX="46" offsetY="26" text="没有图片时候的效果"/>
+    <TextMark defaultDirection="9" direction="9" color="16711680" x="321" y="1777" textMaxWidth="100" offsetX="25" offsetY="10" text="如果没有，就显示这条线"/>
+  </Marks>
+</MKM>

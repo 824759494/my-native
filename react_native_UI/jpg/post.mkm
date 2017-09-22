@@ -1,0 +1,6 @@
+<MKM version="2.0" imageFileUrl="file:///D:/work/react_native_UI/jpg/post.jpg">
+  <Marks>
+    <TextMark defaultDirection="9" direction="9" color="16711680" x="79" y="263" textMaxWidth="443" offsetX="25" offsetY="10" text="这个界面是从discover  界面左上角的发布进来的，点击右上角发送到discover 界面，同时在profile  界面里的分享信息里更新&#xD;"/>
+    <TextMark defaultDirection="9" direction="9" color="16711680" x="318" y="364" textMaxWidth="100" offsetX="25" offsetY="10" text="点击从手机相册里选择照片，但是左上角的返回按钮要留着，不然回不去了，最多只能添加9张照片"/>
+  </Marks>
+</MKM>

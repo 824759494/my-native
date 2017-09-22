@@ -1,0 +1,19 @@
+<MKM version="2.0" imageFileUrl="file:///D:/work/react_native_UI/jpg/profile(my).jpg">
+  <Marks>
+    <TextMark defaultDirection="10" direction="10" color="16711680" x="253" y="107" textMaxWidth="100" offsetX="67" offsetY="33" text="这个界面是我自己的个人信息界面之个人信息"/>
+    <TextMark defaultDirection="9" direction="5" color="16711680" x="567" y="82" textMaxWidth="100" offsetX="25" offsetY="10" text="点击编辑后变成保存，同时下面的内容处于可编辑状态"/>
+    <TextMark defaultDirection="9" direction="9" color="16711680" x="253" y="280" textMaxWidth="100" offsetX="25" offsetY="10" text="这里是沙发信息里的第一张沙发照片，如果没有，应该是一张默认图片，过后传给你"/>
+    <TextMark defaultDirection="9" direction="9" color="16711680" x="212" y="462" textMaxWidth="100" offsetX="25" offsetY="10" text="点击修改昵称"/>
+    <TextMark defaultDirection="9" direction="9" color="16711680" x="212" y="525" textMaxWidth="100" offsetX="25" offsetY="10" text="点击修改所在地"/>
+    <TextMark defaultDirection="9" direction="9" color="16711680" x="84" y="504" textMaxWidth="100" offsetX="25" offsetY="10" text="点击修改头像"/>
+    <TextMark defaultDirection="9" direction="9" color="16711680" x="403" y="581" textMaxWidth="100" offsetX="25" offsetY="10" text="点击框内任何跳转到impression 界面"/>
+    <TextMark defaultDirection="9" direction="5" color="16711680" x="522" y="669" textMaxWidth="100" offsetX="25" offsetY="10" text="点击跳转到verification（menu）界面"/>
+    <TextMark defaultDirection="9" direction="9" color="16711680" x="128" y="780" textMaxWidth="432" offsetX="25" offsetY="10" text="点击个人信息，沙发信息和分享时这条红线左右移动到相应的文字下面，同时下方的信息内容也左右切换到相应的内容，字体颜色也随之相应的变化"/>
+    <TextMark defaultDirection="9" direction="9" color="16711680" x="309" y="842" textMaxWidth="100" offsetX="25" offsetY="10" text="点击跳转到reg_info 界面"/>
+    <TextMark defaultDirection="9" direction="9" color="16711680" x="282" y="1066" textMaxWidth="100" offsetX="25" offsetY="10" text="当没有添加时，默认空白，点击编辑后出现加号和添加书籍，点击后跳转到book（search） 界面"/>
+    <TextMark defaultDirection="9" direction="9" color="16711680" x="261" y="1399" textMaxWidth="100" offsetX="25" offsetY="10" text="当没有添加时，默认空白，点击编辑后出现加号和添加电影，点击后跳转到film（search） 界面"/>
+    <TextMark defaultDirection="9" direction="9" color="16711680" x="186" y="1672" textMaxWidth="100" offsetX="43" offsetY="24" text="这个模块先不做，但是交互逻辑和上面的书籍和电影是一样的"/>
+    <TextMark defaultDirection="9" direction="9" color="16711680" x="226" y="1949" textMaxWidth="100" offsetX="25" offsetY="10" text="没填写时，这段话就是初始状态"/>
+    <TextMark defaultDirection="9" direction="9" color="16711680" x="242" y="2077" textMaxWidth="100" offsetX="25" offsetY="10" text="这句话是初始状态"/>
+  </Marks>
+</MKM>

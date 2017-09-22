@@ -1,0 +1,6 @@
+<MKM version="2.0" imageFileUrl="file:///D:/work/react_native_UI/jpg/book%ef%bc%88search%ef%bc%89.jpg">
+  <Marks>
+    <TextMark defaultDirection="9" direction="9" color="16711680" x="58" y="140" textMaxWidth="245" offsetX="25" offsetY="10" text="这是从profile(my） 界面的喜欢的电影和书籍点击添加后进来的页面"/>
+    <TextMark defaultDirection="9" direction="9" color="16711680" x="137" y="273" textMaxWidth="100" offsetX="25" offsetY="10" text="输入书名后这里出现书名，点击添加后跳转到profile(my)  界面"/>
+  </Marks>
+</MKM>

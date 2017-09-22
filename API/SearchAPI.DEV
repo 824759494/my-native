@@ -1,0 +1,70 @@
+<?php 
+/* 
+ *@FileName: 搜索API.DEV
+ *@author: Json Wong
+ *@description:搜索控制器，普通搜索、地图搜索与高级搜索api提供方，搜索结果界面访问控制接口
+ *@copyright:Moban Technical Team
+ */
+class SearchController extends BaseController{
+	
+	/* 关键字搜索
+	*$_GET['keyids']id数组
+	*@start 分批加起始索引 默认等于0
+	*@partlength 分批加载，每次加载数据长度
+	*@lang 语言 默认‘ch’中文
+	*返回看注释 1
+	*/
+	public function flagsSearch($start=0,$partlength=30,$lang='ch');
+	
+	/* 高级搜索筛选
+	*key搜索目标（当type=0,1,2时分别去国家、省份、城市id，这是地点搜索。 type=3时获取搜索内容沙发主名称或者账号）作为筛选的前提
+	×GET['sex']性别
+	*GET['age']年龄：[start,end]
+	*GET['toilet']
+	*GET['receive_sex']
+	*GET['sleep_bed']
+	*GET['condition_set']沙发类型：参考沙发发布页面
+	×GET['receive_num']：接待人数
+	*@start 分批加起始索引 默认等于0
+	*@partlength 分批加载，每次加载数据长度
+	*@lang 语言 默认‘ch’中文
+	*返回看注释 1
+	*/
+	public function advsearch($key,$type=2,$start=0,$partlength=30,$lang='ch');
+	/* 
+	*普通搜索
+	*@key 搜索目标（当type=0,1,2时分别去国家、省份、城市id，这是地点搜索。 type=3时获取搜索内容沙发主名称或者账号,key=-1 获取所有沙发主信息）
+	*@type 搜索类型 取值0、1、2、3.type=0搜索按国家搜索 type=2按省份搜索 type=2按城市搜索 type=3按账号或者名称搜索
+	*@start 分批加起始索引 默认等于0
+	*@partlength 分批加载，每次加载数据长度
+	*lang 语言 默认‘ch’中文
+	*返回看注释 1
+	*/
+	public function search($key,$type=2,$start=0,$partlength=30,$lang='ch');
+	/* 
+	*搜索地图范围内沙发主信息
+	*@type type=0普通搜索，type=1高级搜索 type=2 关键字搜素
+	*@GET：{'southwest':{'lng':经度,'lat':维度},'northeast':{'lng':经度,'lat':维度},'center':{'lng':经度,'lat':维度}}
+	*上面southwest:左下角，northeast:右下角，center:中心点
+	*返回看注释 1
+	*/
+	public function searchSofaForMap($type);
+
+	/* 
+	*访问搜索界面接口（view 搜索结果页面）
+	*/
+	public function result();
+}
+/* ******************************************注释***********************************************************************
+1、所以搜索接口返回结构是相同的。
+status:操作状态
+num:数据库拥有相关记录总的条数
+list:一次返回的数据数组列表 size<=pageSize 
+list数组元素 ：	
+{'uid':用户id,'account':用户账户,'verify_status':认证状态,'sex':沙主性别,'birthday':沙主生日,'sfdmitnum':接待沙发客次数,'impresstype':沙发印象类型,'sfid':沙发id,
+'sfname'：沙发名称,'sfstatus'：沙发状态,'reveive_sex'：接待沙发客性别,'receive_num'：接待沙发数量,'countryname'：国家名称,'provincename'：省份名称,'cityname'：城市名称,'toilet'：厕所类型,'sleep_bed'：沙发类型,
+'condition_set'：设备、设施集合,'sofapraise'：点赞数量,'payattention'：关注数量,'lng'：经度,'lat'：维度,'imgs':[{'id','path','name'},{...},...],//沙发照片
+'headimage':{'img_id','headImgName','path','type'},//沙主头像
+'flags':[{id:},{id:},...]标签集合}
+***************************************************************************************************************************/
+?>

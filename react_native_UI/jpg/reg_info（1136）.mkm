@@ -1,0 +1,8 @@
+<MKM version="2.0" imageFileUrl="file:///D:/work/react_native_UI/jpg/reg_info%ef%bc%881136%ef%bc%89.jpg">
+  <Marks>
+    <TextMark defaultDirection="9" direction="9" color="16711680" x="329" y="198" textMaxWidth="100" offsetX="25" offsetY="10" text="点击从手机相册选择相片，头像为圆形"/>
+    <TextMark defaultDirection="9" direction="9" color="16711680" x="190" y="629" textMaxWidth="160" offsetX="25" offsetY="10" text="在为选择之前两个icon是灰色，选择以后才变为粉色和蓝色&#xD;"/>
+    <TextMark defaultDirection="9" direction="9" color="16711680" x="240" y="741" textMaxWidth="100" offsetX="25" offsetY="10" text="点击跳转到profile界面"/>
+    <TextMark defaultDirection="9" direction="9" color="16711680" x="259" y="879" textMaxWidth="100" offsetX="25" offsetY="10" text="点击跳转到home界面"/>
+  </Marks>
+</MKM>

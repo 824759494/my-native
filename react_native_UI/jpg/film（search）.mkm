@@ -1,0 +1,6 @@
+<MKM version="2.0" imageFileUrl="file:///D:/work/react_native_UI/jpg/film%ef%bc%88search%ef%bc%89.jpg">
+  <Marks>
+    <TextMark defaultDirection="9" direction="9" color="16711680" x="160" y="403" textMaxWidth="336" offsetX="25" offsetY="10" text="这个界面是从profile(my) 里面的个人信息界面，喜欢的电影点击添加进入的"/>
+    <TextMark defaultDirection="9" direction="9" color="16711680" x="90" y="267" textMaxWidth="283" offsetX="25" offsetY="10" text="输入电影名后这里出现电影供选择，点击添加后，跳转到profile(my)  界面"/>
+  </Marks>
+</MKM>

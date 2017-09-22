@@ -1,0 +1,11 @@
+<MKM version="2.0" imageFileUrl="file:///D:/work/react_native_UI/jpg/menu.jpg">
+  <Marks>
+    <TextMark defaultDirection="9" direction="9" color="16711680" x="136" y="69" textMaxWidth="100" offsetX="25" offsetY="10" text="点击home界面右上角的小头像时右边推动整个home界面向左移动"/>
+    <TextMark defaultDirection="9" direction="9" color="16711680" x="495" y="503" textMaxWidth="100" offsetX="25" offsetY="10" text="开启和关闭状态在psd里有体现，当关闭后搜索会靠后，打开时搜索会靠前"/>
+    <TextMark defaultDirection="9" direction="9" color="16711680" x="365" y="673" textMaxWidth="100" offsetX="25" offsetY="10" text="点击跳转到verification（menu）界面"/>
+    <TextMark defaultDirection="9" direction="9" color="16711680" x="387" y="581" textMaxWidth="100" offsetX="25" offsetY="10" text="点击跳转到setting界面"/>
+    <TextMark defaultDirection="9" direction="9" color="16711680" x="352" y="746" textMaxWidth="100" offsetX="25" offsetY="10" text="点击跳转到help界面"/>
+    <TextMark defaultDirection="9" direction="9" color="16711680" x="378" y="821" textMaxWidth="100" offsetX="25" offsetY="10" text="点击跳转到about界面"/>
+    <TextMark defaultDirection="9" direction="9" color="16711680" x="331" y="1013" textMaxWidth="100" offsetX="25" offsetY="10" text="点击退出登录，跳转到prelogin界面"/>
+  </Marks>
+</MKM>

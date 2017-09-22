@@ -1,0 +1,139 @@
+<?php
+//身份认证
+class AuthorizeController extends CommonController{
+	/* 
+	*身份证件信息验证
+	*$name 姓名
+	*$idnum 身份证证件号码
+	*return:
+	*{
+	*	'status':验证操作结果，参见注释（1）
+	*}
+	*/
+	public  function idValided($name,$idnum);
+	/* 
+	*添加身份证图片
+	*使用uploadify插件上传图片
+	*@return：
+	*{
+	*	'status':上传图片操作状态,
+	*   'imgs'=>[返回的上传图片数据库信息数组]//数组元素参考注释（2）
+	*}
+	*status=0 成功 status=1 未登录 status=2 上传操作失败 status=3 数据库操作错误 
+	*{'status'=>1、2或者3,'error'=>错误消息}
+	*/
+	public function addIdCardImg();
+	/* 
+	*保存上传的身份证件图片
+	*$frontId 身份证正面照相片id
+	*$backId 身份证反面照片id
+	*return :
+	*{
+	*	'status':保持操作状态 0 成功 1 失败
+	*}
+	*/
+	public function saveIdCardImg($frontId,$backId);
+	/* check账号
+	*$account 账号（手机或者邮箱）
+	*return：
+	*{
+	* 'status'：验证结果 true存在 false不存在
+	*}
+	*/
+	public function checkAccount($account=null);
+}
+
+class SecurityController extends CommonController{
+	/* 
+	*绑定手机
+	*$mobile 手机号码
+	*$vcode 验证码
+	*return:
+	*{
+	*	'status':操作状态 取值[0,1,2,3,4,5,6,7]
+	*	0-成功 1-没有验证码信息 2-验证码过期 3-验证码错误 4-未登录 
+	*	5-其他用户已经绑定此号码 6=自己已经绑定过此号码 7-数据更新出错
+	*}
+	*/
+	public function bindMobile($mobile,$vcode);
+	/* 
+	*发送邮箱绑定邮件
+	*return:
+	*{
+	*	'status':操作状态 取值[0,1,2,3,4,5,6,7]
+	*	0-成功 1-邮箱为空 2-自己已经绑定过 3-邮件发送失败 4-与已经绑定的邮箱相同 
+	*	5-未登录 6=自己已经绑定过 7-数据操作失败
+	*}
+	*/
+	public function sendBindEmail($email);
+	/* 
+	*设置密码
+	*$password 密码
+	*$account 注册邮箱或手机
+	*$type 注册方式 1-邮箱 2-手机
+	*$validCode 手机验证码 当注册方式为手机时填写此参数，可选参数
+	*return :
+		*{
+	*	'status':操作状态 取值[0,1,2,3,4,5,6,7]
+	*	0-成功 1-没有此账号 2-验证码错误 3-邮箱为空 4-邮箱与注册邮箱不同 
+	*	5-邮件发送失败 6=验证码数据库操作错误
+	*}
+	*/
+	public function setPassWord($password,$account,$type,$validCode=null);
+	/* 
+	*绑定邮箱、激活账号、找回密码邮件超链接回调函数，会跳转到指定提示页面。
+	*/
+	public function emailManager($code,$key,$type);
+
+	/* 
+	*修改密码
+	*$passwd 新密码
+	*return:
+	*{
+	*	'status':操作状态 0-成功 1-密码与旧密码相同 2-数据库操作失败 3-未登录 4-密码修改失败
+	*}
+	*/
+	public function changePasswd($passwd);
+}
+/***********************************************************************************************************************
+注释：
+	(1)idValidError_code:{
+	   'OK'                  :  0,//验证成功
+	   'KEYERROR'            :  10001,//错误的请求KEY
+	   'KEYRIGHTERROR'       :  10002,//该KEY无请求权限
+	   'KEYOVERTIME'         :  10003,//KEY过期
+	   'SDKKEYERROR'         :  10004,//错误的SDK KEY
+	   'AUTHORIZEOVERTIME'   :  10005,//应用未审核超时，请提交认证
+	   'UNKNOWNREQUEST'      :  10007,//未知的请求源，（服务器没有获取到IP地址）
+	   'FORBIDDENIP'         :  10008,//被禁止的IP
+	   'FORBIDDENKEY'        :  10009,//被禁止的KEY
+	   'CIPOVERLIMIT'        :  10011,//当前IP请求超过限制
+	   'CKEYOVERLIMIT'       :  10012,//当前Key请求超过限制
+	   'TKEYOVERLIMIT'       :	 10013,//测试KEY超过请求限制
+	   'APIMAINTAIN'         :	 10020,//接口维护
+	   'APISTOP' 			 :  10021,//接口停用
+	   'APIOVER'			 :  10022,//appKey按需剩余请求次数为零
+	   'INVALIDIP'			 :  10023,//请求IP无效
+	   'NETERROR'			 :  10024,//网络错误
+	   'NORESULT'			 :  10025,//没有查询到结果
+	   'FREQUENTLY'			 :  10026,//当前请求频率过高超过权限限制
+	   'BLOCKEDACCOUNT'      :  10027,//账号违规被冻结
+	   'PARAMERROR'          :  10028,//传递参数错误
+	   'IDNUMERROR'			 :  206500,//身份证号码错误
+	   'NOIDNUM'			 :  206501,//库中无此身份证记录
+	   'MAINTAINDATACENTER'  :  206502,//身份证验证中心维护中
+	   'IDNUMMISMATCH'		 :	 206503,//身份证号码与真实姓名不匹配
+	}
+	(2)	
+	{
+		'owern_id':图片拥有者的uid
+		'albumid':相册名id（这里不需要理会）
+		'catname':相册名称（不需要理会）
+		'savename':图片名称
+		'savepath':图片存储路径
+		'create_time':创建时间（unix时间戳）
+		'thumbnames':缩略图名称集合（不需要理会）
+		'id':图片存储id
+	}
+***********************************************************************************************************************/
+?>

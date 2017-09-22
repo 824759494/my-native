@@ -1,0 +1,6 @@
+<MKM version="2.0" imageFileUrl="file:///D:/work/react_native_UI/jpg/profile(viewer1).jpg">
+  <Marks>
+    <TextMark defaultDirection="9" direction="9" color="16711680" x="272" y="1141" textMaxWidth="100" offsetX="25" offsetY="10" text="浏览这不可以点击这里"/>
+    <TextMark defaultDirection="9" direction="9" color="16711680" x="236" y="1412" textMaxWidth="100" offsetX="25" offsetY="10" text="点击跳转到photo couch界面"/>
+  </Marks>
+</MKM>
