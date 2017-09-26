@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>事件委托</title>
+    <style>
+        .content>div{
+            width: 100px;
+            height: 100px;
+            margin: 10px;
+            background: #22C238;
+        }
+        .content>.org{
+            background: orangered;
+        }
+        .content>div{
+            width: 600px;
+        }
+    </style>
+</head>
+<body>
+    <div class="content">
+        <div class="block"></div>
+        <div class="org"></div>
+    </div>
+    <button class="onKey">事件绑定</button>
+    <button class="onKey_up">事件绑定 + 清除</button>
+    <button class="onKey_up_one">事件绑定 + 清除单个</button>
+    <button class="upKey">事件清除</button>
+    
+    <div class="content">
+        <div class="ol"><button class="upDown">点击事件</button></div>
+        <div class="ol1"><button class="upDown">点击事件</button></div>
+    </div>
+    <script src="http://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+    <script src="./jquery.page.js"></script>
+    <script type="text/javascript">
+        $(".onKey").click(function(){
+            $(".content").on("click",".block",function(){
+                console.log(this)
+            })
+            $(".content").on("click",".org",function(){
+                console.log(this)
+            })
+        })
+
+        $(".upKey").click(function(){
+            $(".content").off("click")
+        })
+
+        $(".onKey_up").click(function(){
+            $(".content").on("click",".block",function(){
+                console.log(this)
+            })
+            $(".content").off("click")
+            $(".content").on("click",".org",function(){
+                console.log(this)
+            })
+        })
+
+        $(".onKey_up_one").click(function(){
+            $(".content").on("click",".block",function(){
+                console.log(this)
+            })
+            
+            $(".content").on("click",".org",function(){
+                console.log(this)
+            })
+            $(".content").off("click",".block")
+        })
+
+        /* 某个逗比的作死的写法 */
+        var kl = kl || {}
+            kl.prototype = {
+                init:function(val){
+                    console.log(val)
+                }
+            }
+        var m = kl.prototype;
+        m.init = 1234;
+        /* 正常写法 */
+        function Contructor(){
+
+        }
+
+        $.fn.Op = function(val){
+            
+            console.log(val)
+
+            function ml(v){
+                console.log(v)
+            }
+            $(val.el).on("click"," .upDown",function(){
+                val.backFn({mk:$(this)});
+            })
+        }
+
+        $(".dasd").Op({
+            el:".ol",
+            key:"value",
+            backFn:function(key){
+                console.log(1)
+                console.log(key)
+            }
+        })
+
+        $(".sd").Op({
+            el:".ol1",
+            key:"value2",
+            backFn:function(key){
+                console.log(2)
+                console.log(key)
+            }
+        })
+
+
+        $(".ol").page({
+            id: ".ol",
+            ovPage: 1, //默认显示第一页
+            pageSize: 20, //默认每页显示的记录数
+            sizeButtons: 7, //默认显示多少个按钮
+            titleNumber: 200, //默认100条记录
+            backFn: function (m, e) {
+                console.log(1)
+
+            },
+            getPageSize: function (pageSize) {
+                _pageSize = pageSize;
+            }
+        });
+        $(".ol1").page({
+            id: ".ol1",
+            ovPage: 1, //默认显示第一页
+            pageSize: 10, //默认每页显示的记录数
+            sizeButtons: 9, //默认显示多少个按钮
+            titleNumber: 100, //默认100条记录
+            backFn: function (m, e) {
+                console.log(2)
+                
+            },
+            getPageSize: function (pageSize) {
+                _pageSize = pageSize;
+            }
+        });
+
+    </script>
+</body>
+</html>
