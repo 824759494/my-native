@@ -19,6 +19,7 @@
     <script src="./js/echarts.js" charset="utf-8"></script>
     <script src="./js/world.geo.js"></script>
     <script src="./js/common.js"></script>
+    <script src="./js/yq-echarts-map.js"></script>
     <script>
         var chart = echarts.init(document.getElementById('my-geo'));
 
@@ -65,63 +66,109 @@
         console.log(_mapKeyJson)
         console.log(_mapKeyArrs)
 
-        var _colors = ["#14D100","#009D91","#FF6F00","#FB000D","#5DCEC6","#FF9340","#48EA38"];
-        echarts.registerMap('world2', YQmapPath);
+        function getDataJson(v,vFor,_index){
+            if(_index >= 0){
+                if(vFor === 7){
+                    vFor = 0;
+                }
+                _echartsData.push({name:_mapKeyJson[_index]._name,value:v.count,percent:v.percent});
+                _dataRSplitList.push({start:vFor, end:vFor, label: _mapKeyJson[_index]._name, color: _colors[vFor]});
+                vFor++;
+            }
+            return vFor;
+        }
 
+        var _colors = ["#14D100","#009D91","#FF6F00","#ccc","#5DCEC6","#FF9340","#48EA38"];
         var _result = {"Json":{"charts":[{"type":202,"selection":[{"id":2105,"carrier":0},{"id":1803,"carrier":0},{"id":304,"carrier":0},{"id":605,"carrier":0},{"id":704,"carrier":0}],"series":[],"list":[{"id":2105,"count":7215365,"percent":0.3611},{"id":1803,"count":1499486,"percent":0.075},{"id":304,"count":1229766,"percent":0.0615},{"id":605,"count":1221675,"percent":0.0611},{"id":704,"count":907722,"percent":0.0454},{"id":1103,"count":853051,"percent":0.0427},{"id":115,"count":781537,"percent":0.0391},{"id":215,"count":652066,"percent":0.0326},{"id":1924,"count":402998,"percent":0.0202},{"id":1002,"count":320165,"percent":0.016},{"id":907,"count":305045,"percent":0.0153},{"id":1918,"count":293940,"percent":0.0147},{"id":1408,"count":278364,"percent":0.0139},{"id":1404,"count":236166,"percent":0.0118},{"id":906,"count":215075,"percent":0.0108},{"id":1925,"count":212018,"percent":0.0106},{"id":401,"count":178727,"percent":0.0089},{"id":2011,"count":176767,"percent":0.0088},{"id":1314,"count":167274,"percent":0.0084},{"id":1406,"count":159346,"percent":0.008},{"id":604,"count":153220,"percent":0.0077},{"id":2102,"count":140927,"percent":0.0071},{"id":206,"count":139378,"percent":0.007},{"id":116,"count":136615,"percent":0.0068},{"id":322,"count":135010,"percent":0.0068},{"id":1608,"count":131072,"percent":0.0066},{"id":1917,"count":104434,"percent":0.0052},{"id":905,"count":104380,"percent":0.0052},{"id":805,"count":92945,"percent":0.0047},{"id":1105,"count":80955,"percent":0.0041},{"id":205,"count":79881,"percent":0.004},{"id":902,"count":78103,"percent":0.0039},{"id":1606,"count":69119,"percent":0.0035},{"id":310,"count":68235,"percent":0.0034},{"id":1610,"count":67705,"percent":0.0034},{"id":2004,"count":61386,"percent":0.0031},{"id":1914,"count":59683,"percent":0.003},{"id":1101,"count":56053,"percent":0.0028},{"id":1913,"count":52157,"percent":0.0026},{"id":501,"count":50060,"percent":0.0025},{"id":1907,"count":46680,"percent":0.0023},{"id":707,"count":45492,"percent":0.0023},{"id":1802,"count":45033,"percent":0.0023},{"id":1208,"count":40920,"percent":0.002},{"id":9801,"count":37162,"percent":0.0019},{"id":1202,"count":35269,"percent":0.0018},{"id":1305,"count":33328,"percent":0.0017},{"id":318,"count":33069,"percent":0.0017},{"id":313,"count":30117,"percent":0.0015},{"id":903,"count":28740,"percent":0.0014},{"id":319,"count":25728,"percent":0.0013},{"id":217,"count":23237,"percent":0.0012},{"id":504,"count":22737,"percent":0.0011},{"id":112,"count":22404,"percent":0.0011},{"id":503,"count":17022,"percent":0.0009},{"id":1915,"count":18062,"percent":0.0009},{"id":202,"count":16881,"percent":0.0008},{"id":9701,"count":15412,"percent":0.0008},{"id":1607,"count":14678,"percent":0.0007},{"id":901,"count":13707,"percent":0.0007},{"id":1501,"count":12615,"percent":0.0006},{"id":1601,"count":11236,"percent":0.0006},{"id":1316,"count":12475,"percent":0.0006},{"id":1919,"count":10072,"percent":0.0005},{"id":1321,"count":9461,"percent":0.0005},{"id":321,"count":9155,"percent":0.0005},{"id":1909,"count":10846,"percent":0.0005},{"id":1308,"count":9520,"percent":0.0005},{"id":801,"count":9172,"percent":0.0005},{"id":1203,"count":10794,"percent":0.0005},{"id":1306,"count":7551,"percent":0.0004},{"id":1701,"count":7345,"percent":0.0004},{"id":1410,"count":7626,"percent":0.0004},{"id":117,"count":5892,"percent":0.0003},{"id":1108,"count":6791,"percent":0.0003},{"id":113,"count":6955,"percent":0.0003},{"id":2103,"count":6408,"percent":0.0003},{"id":1210,"count":6391,"percent":0.0003},{"id":1003,"count":4042,"percent":0.0002},{"id":2104,"count":3134,"percent":0.0002},{"id":1313,"count":4787,"percent":0.0002},{"id":703,"count":3444,"percent":0.0002},{"id":1302,"count":4024,"percent":0.0002},{"id":2204,"count":4976,"percent":0.0002},{"id":212,"count":4027,"percent":0.0002},{"id":103,"count":4798,"percent":0.0002},{"id":2001,"count":4250,"percent":0.0002},{"id":705,"count":2778,"percent":0.0001},{"id":502,"count":1648,"percent":0.0001},{"id":9702,"count":1251,"percent":0.0001},{"id":204,"count":1093,"percent":0.0001},{"id":210,"count":1442,"percent":0.0001},{"id":1001,"count":2437,"percent":0.0001},{"id":1109,"count":1590,"percent":0.0001},{"id":302,"count":2344,"percent":0.0001},{"id":2012,"count":1831,"percent":0.0001},{"id":216,"count":2614,"percent":0.0001},{"id":603,"count":1027,"percent":0.0001},{"id":404,"count":1288,"percent":0.0001},{"id":203,"count":2340,"percent":0.0001},{"id":1903,"count":2201,"percent":0.0001},{"id":904,"count":1444,"percent":0.0001},{"id":804,"count":1057,"percent":0.0001},{"id":2010,"count":629,"percent":0.0},{"id":1403,"count":237,"percent":0.0},{"id":315,"count":27,"percent":0.0},{"id":2203,"count":415,"percent":0.0},{"id":1402,"count":12,"percent":0.0},{"id":317,"count":77,"percent":0.0},{"id":9102,"count":1,"percent":0.0},{"id":1409,"count":21,"percent":0.0},{"id":208,"count":74,"percent":0.0},{"id":9009,"count":2,"percent":0.0},{"id":507,"count":5,"percent":0.0},{"id":1603,"count":350,"percent":0.0},{"id":312,"count":154,"percent":0.0},{"id":1920,"count":20,"percent":0.0},{"id":1605,"count":656,"percent":0.0},{"id":110,"count":9,"percent":0.0},{"id":1106,"count":48,"percent":0.0},{"id":2601,"count":495,"percent":0.0},{"id":1310,"count":13,"percent":0.0},{"id":9007,"count":21,"percent":0.0},{"id":1923,"count":128,"percent":0.0},{"id":1604,"count":317,"percent":0.0},{"id":9004,"count":646,"percent":0.0},{"id":1905,"count":29,"percent":0.0},{"id":1201,"count":163,"percent":0.0},{"id":2602,"count":949,"percent":0.0},{"id":2202,"count":61,"percent":0.0},{"id":316,"count":125,"percent":0.0},{"id":211,"count":640,"percent":0.0},{"id":1204,"count":27,"percent":0.0},{"id":320,"count":61,"percent":0.0},{"id":714,"count":41,"percent":0.0},{"id":2205,"count":1,"percent":0.0},{"id":323,"count":4,"percent":0.0},{"id":1930,"count":15,"percent":0.0},{"id":1407,"count":857,"percent":0.0},{"id":713,"count":18,"percent":0.0},{"id":1319,"count":162,"percent":0.0},{"id":1301,"count":269,"percent":0.0},{"id":1929,"count":8,"percent":0.0},{"id":1928,"count":31,"percent":0.0},{"id":709,"count":385,"percent":0.0},{"id":505,"count":95,"percent":0.0},{"id":301,"count":75,"percent":0.0},{"id":1318,"count":344,"percent":0.0},{"id":1207,"count":392,"percent":0.0},{"id":1205,"count":28,"percent":0.0},{"id":402,"count":36,"percent":0.0},{"id":105,"count":317,"percent":0.0},{"id":9201,"count":1,"percent":0.0},{"id":2002,"count":281,"percent":0.0},{"id":1908,"count":187,"percent":0.0},{"id":1614,"count":4,"percent":0.0},{"id":1317,"count":341,"percent":0.0},{"id":9602,"count":405,"percent":0.0},{"id":908,"count":415,"percent":0.0},{"id":1602,"count":305,"percent":0.0},{"id":1315,"count":9,"percent":0.0},{"id":1307,"count":37,"percent":0.0},{"id":2101,"count":275,"percent":0.0},{"id":1906,"count":2,"percent":0.0},{"id":1804,"count":202,"percent":0.0},{"id":1304,"count":42,"percent":0.0},{"id":1926,"count":10,"percent":0.0},{"id":213,"count":828,"percent":0.0},{"id":303,"count":55,"percent":0.0},{"id":1401,"count":851,"percent":0.0},{"id":1912,"count":34,"percent":0.0},{"id":508,"count":6,"percent":0.0},{"id":9203,"count":107,"percent":0.0},{"id":1911,"count":398,"percent":0.0},{"id":314,"count":6,"percent":0.0},{"id":1209,"count":77,"percent":0.0},{"id":1927,"count":22,"percent":0.0},{"id":1303,"count":79,"percent":0.0},{"id":2005,"count":99,"percent":0.0},{"id":2009,"count":2,"percent":0.0},{"id":104,"count":838,"percent":0.0},{"id":802,"count":46,"percent":0.0},{"id":712,"count":138,"percent":0.0},{"id":102,"count":59,"percent":0.0},{"id":1322,"count":662,"percent":0.0},{"id":201,"count":38,"percent":0.0},{"id":9501,"count":1,"percent":0.0},{"id":1206,"count":15,"percent":0.0},{"id":9202,"count":191,"percent":0.0},{"id":1102,"count":952,"percent":0.0},{"id":1921,"count":185,"percent":0.0},{"id":9006,"count":325,"percent":0.0},{"id":1312,"count":27,"percent":0.0},{"id":219,"count":27,"percent":0.0},{"id":207,"count":91,"percent":0.0},{"id":702,"count":29,"percent":0.0},{"id":1902,"count":27,"percent":0.0},{"id":701,"count":52,"percent":0.0},{"id":1107,"count":13,"percent":0.0},{"id":9005,"count":89,"percent":0.0},{"id":218,"count":169,"percent":0.0},{"id":9603,"count":762,"percent":0.0},{"id":306,"count":926,"percent":0.0},{"id":2302,"count":1,"percent":0.0},{"id":106,"count":542,"percent":0.0},{"id":2003,"count":690,"percent":0.0},{"id":1104,"count":8,"percent":0.0},{"id":2007,"count":275,"percent":0.0},{"id":9002,"count":13,"percent":0.0},{"id":2501,"count":7,"percent":0.0},{"id":403,"count":39,"percent":0.0},{"id":1916,"count":14,"percent":0.0},{"id":9001,"count":127,"percent":0.0},{"id":2006,"count":9,"percent":0.0},{"id":308,"count":3,"percent":0.0},{"id":1323,"count":364,"percent":0.0},{"id":9502,"count":3,"percent":0.0}]}]},"Code":0};
-        var _charList = _result.Json.charts[0].list;
+        var _charList = _result.Json.charts[0].list.slice();
+        console.log(_charList)
         var _echartsData = [],_dataRSplitList = [];
         //用于循环颜色的值
-        var vFor = 0;
-        _charList.forEach(function(v,i,arr){
-            if(v.hasOwnProperty("key")){
+        var vFor = 0,_charI = 0,_charLen = _charList.length;
+        for(_charI ; _charI < _charLen; _charI++){
+            var v = _charList[_charI];
+            if(v.hasOwnProperty("id")){
                 var _index;
-                if(v.key.length === 3){
-                    _index = _mapKeyArrs.indexOf("0" + v.key);
-                    if(_index >= 0){
-                        _echartsData.push({name:_mapKeyJson[_index].name,value:})
-                        continue;
-                    }
+                if(v.id.length === 3){
+                    _index = _mapKeyArrs.indexOf("0" + v.id);
+                    vFor = getDataJson(v,vFor,_index);
+                }else{
+                    _index = _mapKeyArrs.indexOf(v.id.toString());
+                    vFor = getDataJson(v,vFor,_index);
                 }
             }
-        })
+        }
+        console.log(_echartsData)
+        console.log(_dataRSplitList)
+        echarts.registerMap('world2', YQmapPath);
         option = {
             tooltip:{
-                /* formatter:function(a,b,c,d){
-                    console.log(a.data)
-                    return "{a0}"
-                } */
-                formatter: function (params, ticket, callback) {
-                    console.log(params)
-                    return "<h1>" + params.data.name + "</h1>";
-                }
-            },  
+                show:true
+            }, 
             series : [
                 {
                     name: '随机数据',
                     type: 'map',
                     mapType: 'world2',
                     selectedMode : 'single',
-                    data:[
-                        {
-                            name: 'China', selected:false,value:1,
-                            kl:"测试是否能拿取"
+                    data:_echartsData,//各省地图颜色数据依赖value
+                    tooltip:{
+                        formatter: function (params, ticket, callback) {
+                            console.log(params)
+                            return "<h1 style='color:#fff;'><img src='./img/s.png'>" + params.name + "</h1>";
                         }
-                    ]//各省地图颜色数据依赖value
+                    }, 
+                },
+                {
+                    name: '地图二',
+                    type: 'map',
+                    mapType: 'world',
+                    selectedMode : 'single',
+                    zlevel:9,
+                    data:_echartsData,//各省地图颜色数据依赖value
+                    tooltip:{
+                        formatter: function (params, ticket, callback) {
+                            console.log(params)
+                            return "<h3 style='color:#fff;'>" + params.name + "</h3>";
+                        }
+                    }, 
                 }
             ],
-            dataRange: {
-                x: '-1000px',//图例横轴位置
-                y: '-1000px',//图例纵轴位置
-                splitList: [
-                    {start:1, end:1, label: 'dada', color: '#14D100'}
-                   
-                ]
+            visualMap:{
+                min: 0,
+                max: 2000000,
+                /* calculable : true, */
+                splitNumber: 20,
+                color: _colors,
+                textStyle: {
+                    color: '#000'
+                } ,
+                outOfRange :{
+                    color: ['red'],
+                    symbolSize: [0, 1000000]
+                }
             }
+            /* dataRange: {
+                //x: '-1000px',//图例横轴位置
+                //y: '-1000px',//图例纵轴位置
+                splitList: _dataRSplitList
+            } */
         };
-        //console.log(echarts.getMap("world2"))
-        //console.log(chart)//.map.getPosByGeo("world",[47.97822265625001, 7.9970703125]))
+        console.log(echarts.getMap("world2"))
+        console.log(chart)//.map.getPosByGeo("world",[47.97822265625001, 7.9970703125]))
         chart.setOption(option);
+
+        chart.dispatchAction({
+            type: 'mapSelect',
+            // 可选，系列 index，可以是一个数组指定多个系列
+            //seriesIndex?: number|Array,
+            // 可选，系列名称，可以是一个数组指定多个系列
+            //seriesName?: string|Array,
+            // 数据的 index，如果不指定也可以通过 name 属性根据名称指定数据
+            //dataIndex?: number,
+            // 可选，数据名称，在有 dataIndex 的时候忽略
+            //name : "China"
+        })
     </script>
 </body>
 </html>
