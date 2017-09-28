@@ -27,7 +27,6 @@
     //组件的默认参数
     _defaultOption = {
         el : doc.querySelector(".geo-map"),
-        registerMap:"",
         g : {
             enableDefaultTip : true,
             tooltip : {
@@ -83,10 +82,25 @@
      * name : "China"
      **/
     _this.prototype.mapSelect = function(obj){
-        if(obj && obj.constructor === Object){
-            obj = $.extend(true,{},{type: 'mapSelect'},obj);
-            _echarts.dispatchAction(obj);
-        }
+        dispatchAction(obj,"mapSelect");
+    }
+
+    /**
+     * 取消选中  参数同mapSelect
+     **/
+    _this.prototype.mapUnSelect = function(obj){
+        dispatchAction(obj,"mapUnSelect");
+    }
+    /**
+     * 向echarts中注册一个地图资源 接收一个Object 或 Array
+     * {
+     *      name:地图类型的名称
+     *      data:地图的json数据
+     * }
+     * [name,data]
+     **/
+    _this.prototype.regMap = function(res){
+        registerMap(res);
     }
 
     /**
@@ -135,21 +149,6 @@
                 _option.series.push(_opts.g.map);
             }
         }
-        //判断如何注册地图
-        if(_opts.registerMap.constructor === Function){
-            _regMap = _opts.registerMap();
-            if(_regMap && _regMap.constructor === Array && _regMap.length > 1){
-                echarts.registerMap(_regMap[0],_regMap[1]);
-            }else{
-                if(map){
-                    echarts.registerMap("world",map);
-                }
-            }
-        }else{
-            if(map){
-                echarts.registerMap("world",map);
-            }
-        }
         console.log(_option)
     }
 
@@ -161,6 +160,39 @@
         _echarts.setOption(_option);
     }
 
+    /**
+     * 触发echarts的dispatchAction事件
+     * 接收一个Object参数与事件类型参数
+     **/
+    function dispatchAction(obj,type){
+        if(obj && obj.constructor === Object){
+            obj = $.extend(true,{},{type: type},obj);
+            _echarts.dispatchAction(obj);
+        }
+    }
+
+
+    /**
+     * 处理注册地图的函数
+     **/
+    function registerMap(res){
+        if(res){
+            var _type = res.constructor;
+            switch (_type) {
+                case Object:
+                    
+                    break;
+                case Array:
+                    
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
+
     return _this;
 
-})(document,window,jQuery,echarts,window.YQmapPath?YQmapPath:undefined);
+})(document,window,jQuery,echarts,(function(){
+    return 
+})());
