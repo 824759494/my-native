@@ -63,6 +63,8 @@
     },
     //继承用户的参数以后
     _opts = {};
+    //存储注册的map的名称
+    var _regMapName = [];
     /**
      * 初始化map的参数
      * **/
@@ -174,22 +176,40 @@
 
     /**
      * 处理注册地图的函数
+     * 判断地图名称是否存在，存在则提示，不存在则放入名称集合
      **/
     function registerMap(res){
         if(res){
             var _type = res.constructor;
             switch (_type) {
                 case Object:
-                    
+                    if(res.hasOwnProperty("name") && res.hasOwnProperty("data")){
+                        if(_regMapName.indexOf(res.name) >= 0){
+                            console.warn("地图名称已存在,已覆盖已有地图");
+                        }else{
+                            _regMapName.push(res[0]);
+                        }
+                        echarts.registerMap(res.name, res.data);
+                    }
                     break;
                 case Array:
-                    
+                    if(res.length > 1){
+                        if(_regMapName.indexOf(res[0]) >= 0){
+                            console.warn("地图名称已存在,已覆盖已有地图");
+                        }else{
+                            _regMapName.push(res[0]);
+                        }
+                        echarts.registerMap(res[0], res[1]);
+                    }
                     break;
                 default:
                     break;
             }
         }
     }
+
+    //注册默认的地图
+    _this.prototype.regMap(["world",map]);
 
     return _this;
 
