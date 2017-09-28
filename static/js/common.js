@@ -247,7 +247,8 @@ var mapdatas = [
     { "value": "MYT", "name": "YT"},
     { "value": "ZAF", "name": "ZA"},
     { "value": "ZMB", "name": "ZM"},
-    { "value": "ZWE", "name": "ZW"}
+    { "value": "ZWE", "name": "ZW"},
+    { "value": "YK", "name": "YK"}
 ]                                  
 
 VResGCountry = {

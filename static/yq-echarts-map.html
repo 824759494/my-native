@@ -22,6 +22,13 @@
     <script>
         var map = new YQEchartsMap();
 
+        map.autoI18n({
+            key : "_mnemonic",
+            value : "count",
+            type : 2,
+            data : []
+        })
+
         map.initConfig({
             registerMap : function(){
                 return "test"
