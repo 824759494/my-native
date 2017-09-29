@@ -58,11 +58,14 @@
 
             var name = features[i].properties.name;
             var ffix = features[i].id;
-            map.push({
-                "name": name , "ffix": ffix
-            });
+            if(features[i].hasOwnProperty("key")){
+                map.push({
+                    "name": name , key : features[i].key,ffix : ffix
+                });
+            }
+            
         };
-        console.log(map)
+        console.log("输出一份带key的name：",map)
 
         var __mapJson = VResGCountry.items,
         _mapKeyJson = [],_mapKeyArrs = [];
