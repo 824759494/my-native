@@ -31,10 +31,10 @@
         g : {
             enableDefaultTip : true,
             tooltip : {
-                formatter: function (params, ticket, callback) {
+                /* formatter: function (params, ticket, callback) {
                     console.log(params)
                     return "<h1 style='color:#fff;'><img src='./img/s.png'>" + params.name + "</h1>";
-                }
+                } */
             },
             enableVisualMap : true,
             visualMap : {
@@ -158,6 +158,7 @@
      * **/
     _this.prototype.setOption = function(){
         _echarts.setOption(_option);
+        return _echarts;
     }
 
     /**
@@ -222,6 +223,17 @@
      **/
     function createEcharts(){
         _echarts = echarts.init(_opts.el);
+        /* _echarts.showLoading({
+            text: 'loading',
+            color: '#c23531',
+            textColor: '#000',
+            maskColor: 'rgba(255, 255, 255, 0.8)',
+            zlevel: 0
+        }) */
+        //实现窗体更改时自动改变大小
+        window.addEventListener("resize", function () {
+            _echarts.resize();
+        });
     }
 
     /**

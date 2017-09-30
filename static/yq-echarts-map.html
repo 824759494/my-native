@@ -12,13 +12,14 @@
         .yq-map-tip>p{
             margin: 0;
             padding: 0;
-            text-indent: 10px;
             font-size: 12px;
-            padding-right:10px; 
+            text-indent: 6px;
+            padding-right:8px; 
         }
         .yq-map-text::before{
-            content: "● ";
+            content: "●";
             color: #00abff;
+            padding-right:8px; 
         }
     </style>
 </head>
@@ -77,9 +78,6 @@
             var _tempName = "",_tempValue = 0,_tempPercent = "0.00%",
                 _tempNameI = "国家/地区：",_tempValueI = "数量：",_tempPercentI = "百分比：";
             map.initConfig({
-                registerMap : function(){
-                    return "test"
-                },
                 g:{
                     tooltip : {
                         formatter: function (params, ticket, callback) {
@@ -113,11 +111,11 @@
                 data : [i18Data(_result,_I18.data)]
             })
 
-            map.setOption();
+            var _ec = map.setOption();
 
-            map.mapSelect({
+           /*  map.mapSelect({
                 dataIndex : 0
-            })
+            }) */
         })()
         
     </script>
