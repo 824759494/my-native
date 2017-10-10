@@ -31,10 +31,7 @@
         g : {
             enableDefaultTip : true,
             tooltip : {
-                /* formatter: function (params, ticket, callback) {
-                    console.log(params)
-                    return "<h1 style='color:#fff;'><img src='./img/s.png'>" + params.name + "</h1>";
-                } */
+                formatter:""
             },
             enableVisualMap : true,
             visualMap : {
@@ -79,6 +76,9 @@
                     }
                 },
                 data:[]
+            },
+            extend:{
+
             }
         },
         result:[] //同echarts的series下的map配置信息，可有多个{}存放
@@ -140,7 +140,7 @@
      * {
      *      key:与地图code中idt关联的字段名
      *      value: value的字段名 没有此字段自动取value
-     *      data:数据的集合 可以为多个地图的数据
+     *      data:数据的集合 可以为多个地图的数据 每个对象中必须包含一个name和一个value
      *      type:1 指定处理的类型1表示只处理name 和 value 2表示将处理name和value并将整个对象放入
      *          
      * }
@@ -156,7 +156,11 @@
     /**
      * 生成echarts图形 可重复调用
      * **/
-    _this.prototype.setOption = function(){
+    _this.prototype.setOption = function(result){
+        if(result){
+            //存在此数据参数时则调用不存在默认执行
+            setOpt(result);
+        }
         _echarts.setOption(_option);
         return _echarts;
     }
@@ -166,6 +170,7 @@
      **/
     function aiParams(_params){
         if(_params.length <= 0){
+            _opts = $.extend(true,{},_defaultOption);
             return;
         }
         switch (_params[0].constructor) {
@@ -176,7 +181,7 @@
                 
                 break;
             default:
-                console.warn("传入参数不正确",_params[0]);
+                console.warn("传入参数不正确");
                 break;
         }
     }
@@ -200,7 +205,7 @@
         if(_opts.g.enableGMap){
             if(_result.length > 0){
                 for(_ind; _ind < _result.length; _ind++){
-                    _tempMap = $.extend(true,_opts.g.map,_result[_ind]);
+                    _tempMap = $.extend(true,{},_opts.g.map,_result[_ind]);
                     if(!_tempMap.hasOwnProperty("data")){
                         _tempMap.data = [];
                     }
@@ -215,7 +220,39 @@
         if(_opts.g.enableVisualMap){
             _option.visualMap = _opts.g.visualMap;
         }
-        //console.log(_option)
+
+        //将扩展的全局配置引用到实际的组件配置中
+        _option = $.extend(true,{},_option,_opts.g.extend);
+    }
+
+    /**
+     * 处理更新后的数据
+     * **/
+    function setOpt(result){
+        var _ind = 0,_temp = "";
+        if(result && result.constructor === Array){
+            if(result.length > 0 & _option.series.length > result.length){
+                //删除不必要的数据
+                _option.series.splice(result.length - 1,_option.series.length - result.length);
+            }
+            for(_ind;_ind < result.length;_ind++){
+                _temp = result[_ind];
+                if(_temp){
+                    switch (_temp.constructor) {
+                        case Array:
+                            _option.series[_ind].data = _temp.slice();
+                            break;
+                        case Object:
+                            _option.series[_ind] = $.extend(true,{},_option.series[_ind],_temp);
+                            _option.series[_ind].data = _temp.slice();
+                            break;
+                        default:
+                            throw Error("不是一个正确的参数",e);
+                            break;
+                    }
+                }
+            }
+        }
     }
 
     /**
@@ -223,13 +260,6 @@
      **/
     function createEcharts(){
         _echarts = echarts.init(_opts.el);
-        /* _echarts.showLoading({
-            text: 'loading',
-            color: '#c23531',
-            textColor: '#000',
-            maskColor: 'rgba(255, 255, 255, 0.8)',
-            zlevel: 0
-        }) */
         //实现窗体更改时自动改变大小
         window.addEventListener("resize", function () {
             _echarts.resize();
