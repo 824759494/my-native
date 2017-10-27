@@ -10,20 +10,23 @@ let port = process.env.PORT || 3000;
 let app = express();
 
 app.engine("html",function(filepath,option,callback){
-    console.log(option)
     fs.readFile(filepath,function(err,content){
         if(err){
             return callback(new Error(err));
         }
-        let _str = content.toString().split("{{"),_html = "";
-        _html += _str.splice(0,1);
-        for(let i = 0;i< _str.length;i++){
-            let _temp = _str[i].split("}}");
-            _str[i] = _temp[0];
-            let _ev = eval("option." + _temp[0]);
-            _html += _ev?_ev:"" + _temp[1];
-        }
-        return callback(null,_html);
+        let _str = content.toString(),
+        reg = /{{([^}}]+)}}/g,
+        s = _str.match(reg),
+        _temp = "",
+        _ev;
+        s.forEach(function(v){
+            _temp = v;
+            v = v.replace("{{","");
+            v = v.replace("}}","");
+            _ev = eval("option." + v);
+            _str =  _str.replace(_temp,_ev?_ev:"");
+        });
+        return callback(null,_str);
     })
 })
 
@@ -44,7 +47,7 @@ app.use(function (req, res, next) {
         mk:{
             data:"这是一个测试"
         },
-        ok:"<h1 style='red'>Hello World etool</h1>"
+        ok:"<h1 style='color:red;'>Hello World etool</h1>"
     }))
    /*  if (url != "/login") {
         return res.redirect("/login");
@@ -55,8 +58,8 @@ app.get("/write",function(request,response){
     console.log(__dirname)
 
     let rs = fs.createReadStream(__dirname + "./881223.jpg");
-    rs.pipe(fs.createWriteStream(__dirname + "/source/123.png"));   
-    
+    rs.pipe(fs.createWriteStream(__dirname + "/source/123.png"));
+
     response.render("write",{
         title:"读取文件保存文件",
         alt:"这是一个文件读取保存的页面"
@@ -92,7 +95,7 @@ app.post("/upload",multipartMidd,function(req,res){
         _time = "";
     }else{
         getMkDir(_time);
-    } 
+    }
 
     _text = returnText("文件上传失败","文件上传失败",_fileName,"文件已存在");
     let exists = fs.existsSync(__dirname + "/source/" + _time + "/" + _fileName);
@@ -123,7 +126,7 @@ function getMkDir(_time){
              console.log("上传的文件时创建的文件夹下的文件：" ,fs.readdirSync(__dirname + "/source/" + v));
          }
      })
-     
+
 
      let _mkFlag = fs.mkdirSync(__dirname + "/source/" + _time);
      //console.log("创建是否成功：",_mkFlag)

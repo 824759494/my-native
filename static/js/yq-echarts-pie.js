@@ -4,27 +4,8 @@
  * return 当前的构造函数
  **/
 ;var YQEchartsPie = (function(doc,win,$,echarts){
-
-    /**
-     * _this 一个构造函数用于实例化，
-     * _yqEcharts window下YQEcharts的全局对象存储有关echarts的所有组件，
-     **/
-    var _this = function(){},
-    _yqEcharts = win.YQEcharts = win.YQEcharts || {};
-    //将当前的pie组件放入全局的YQEcharts中
-    _yqEcharts.pie = _this;
-    //初始化的一个echarts的实例变量
-    var _echarts,_colors = ["#7fa1da","#6dc8d4","#7fdabd","#b2e9aa"];
-    //默认的echarts的配置参数
-    var _option = {
-        tooltip:{
-            show:true
-        },
-        series:[
-
-        ]
-        
-    },
+    
+    var _colors = ["#7fa1da","#6dc8d4","#7fdabd","#b2e9aa"],
     //组件的默认参数
     _defaultOption = {
         el : doc.querySelector(".geo-pie"),
@@ -67,15 +48,45 @@
     },
     //继承用户的参数以后
     _opts = {};
-    
+    /**
+     * _this 一个构造函数用于实例化，
+     * _yqEcharts window下YQEcharts的全局对象存储有关echarts的所有组件，
+     **/
+    var _this = function(){
+        this.pies = [];
+        this._colors = ["#7fa1da","#6dc8d4","#7fdabd","#b2e9aa"];
+        //echarts的实例变量
+        this._echarts;
+        this.first = true;
+        //默认的echarts的配置参数
+        this._option = {
+            tooltip:{
+                show:true
+            },
+            series:[
+
+            ]
+        };
+    },
+    _yqEcharts = win.YQEcharts = win.YQEcharts || {};
+    //将当前的pie组件放入全局的YQEcharts中
+    _yqEcharts.pie = _this;
     /**
      * 初始化map的参数
      * **/
     _this.prototype.initConfig = function(){
-        var _params = Array.prototype.slice.apply(arguments);
+        var _params = Array.prototype.slice.apply(arguments),
+        _self = this;
         aiParams(_params);
-        paramsToOption();
-        createEcharts();
+        this._option = paramsToOption(this._option,this.pies);
+        if(this.first){
+            this._echarts = createEcharts();
+            //实现窗体更改时自动改变大小
+            window.addEventListener("resize",function(){
+                _self._echarts.resize();
+            });
+            this.first = false;
+        }
     }
 
     /**
@@ -84,15 +95,68 @@
     _this.prototype.setOption = function(result){
         if(result){
             //存在此数据参数时则调用不存在默认执行
-            setOpt(result);
+            setOpt(result,this._option);
         }
-        _echarts.setOption(_option);
+        this._echarts.setOption(this._option);
         return _echarts;
+    }
+    /**
+     * 切换一条折线的选中状态
+     * @param {String} name 选中的折线
+     * **/
+    _this.prototype.toggleSelect = function(name){
+        this._echarts.dispatchAction({
+            type: 'pieToggleSelect',
+            name: name
+        })
     }
 
     /**
-     * 处理传入进来的参数配置
-     **/
+     * @param {Number} 接收一个下标清除一条数据
+     */
+    _this.prototype.remove = function(index){
+        this.pies.splice(index,1);
+        this._option.series = this.pies.slice();
+        this._echarts.setOption(this._option,true);
+    }
+
+    /**
+     * 清空图表
+     */
+    _this.prototype.clear = function(){
+        if(this._echarts){
+            this._echarts.clear();
+        }
+        this.pies = [];
+        this.first = true;
+        this._option.series = this.pies.slice(0);
+    }
+
+    /**
+     * 重置窗体
+     */
+    _this.prototype.resize = function(){
+        this._echarts.resize();
+    }
+
+    /**
+     * @param {Array} colors 颜色集合
+     */
+    _this.prototype.setColor = function(colors){
+        this._option.color = colors;
+    }
+
+    /**
+     * 获取echarts的是初始化实例对象
+     * @return {[type]} echarts的init实例对象
+     */
+    _this.prototype.getInitEchart = function(){
+        return  this._echarts;
+    }
+    /**
+     * 处理参数信息
+     * @param  {Object} _params 参数集合
+     */
     function aiParams(_params){
         if(_params.length <= 0){
             _opts = $.extend(true,{},_defaultOption);
@@ -103,7 +167,6 @@
                 _opts = $.extend(true,{},_defaultOption,_params[0]);
                 break;
             case Function:
-                
                 break;
             default:
                 console.warn("传入参数不正确",_params[0]);
@@ -114,18 +177,19 @@
     /**
      * 处理组件的参数加入到echarts的参数中
      **/
-    function paramsToOption(){
+    function paramsToOption(option,pies){
         //临时的下标，存储一个临时的对象数据
         var _ind = 0,_temp;
         //配置信息中的地图数据
-        var _result = _opts.result;
+        var _result = _opts.result,
+        _option = option;
         //确认是否需要开启全局的自定义tip提示信息
         if(_opts.g.enableDefaultTip){
             if(_opts.g.tooltip.formatter.constructor === Function){
                 _option.tooltip.formatter = _opts.g.tooltip.formatter;
             }
         }
-        
+
         //判断是否开启全局通用饼图的配置信息，可被用户定义的数据覆盖
         if(_opts.g.enableGPie){
             if(_result.length > 0){
@@ -135,6 +199,7 @@
                         _temp.data = [];
                     }
                     _option.series.push(_temp);
+                    pies.push(_temp);
                 }
             }else{
                 _option.series.push(_opts.g.pie);
@@ -143,12 +208,13 @@
 
         //将扩展的全局配置引用到实际的组件配置中
         _option = $.extend(true,{},_option,_opts.g.extend);
+        return _option;
     }
 
     /**
      * 处理更新后的数据
      * **/
-    function setOpt(result){
+    function setOpt(result,_option){
         var _ind = 0,_temp = "";
         if(result && result.constructor === Array){
             if(result.length > 0 & _option.series.length > result.length){
@@ -160,6 +226,9 @@
                 if(_temp){
                     switch (_temp.constructor) {
                         case Array:
+                            if(!_option.series[_ind]){
+                                _option.series[_ind] = $.extend({},_opts.g.pie);
+                            }
                             _option.series[_ind].data = _temp.slice();
                             break;
                         case Object:
@@ -179,11 +248,7 @@
      * 创建一个echarts实例用于生成图表
      **/
     function createEcharts(){
-        _echarts = echarts.init(_opts.el);
-        //实现窗体更改时自动改变大小
-        window.addEventListener("resize", function () {
-            _echarts.resize();
-        });
+        return echarts.init(_opts.el);
     }
 
     return _this;

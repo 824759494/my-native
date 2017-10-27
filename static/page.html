@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>分页</title>
+    <style>
+        .btn{
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            line-height: 20px;
+            padding: 10px;
+            box-shadow: 0 0 1px rgba(0,0,0,.1);
+            text-align: center;
+            border: 1px solid #e0e0e0;
+        }
+        .page-content{
+            display: none;
+        }
+        .page-content.current{
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="content">
+
+        </div>
+        <div class="page">
+            <div class="btn">1</div>
+            <div class="btn">2</div>
+            <div class="btn">3</div>
+            <div class="btn">4</div>
+        </div>
+    </div>
+    <script>
+
+        var _result = [];
+        for(var i = 0;i < 20; i++){
+            _result.push({name:"Morris" + Math.round(Math.random() * 100),value : Math.round(Math.random() * 120) });
+        }
+        var _str = "",_page = 0,_pageSize = 5,_current = 1;
+        _result.forEach(function(v,i){
+            if(i % _pageSize === 0){
+                _page++;
+            }
+            _str += '<div class="page-content '+ (_current === _page ? 'current':'') +'" page-key="'+ _page +'">姓名：'+ v.name +'    分数：'+ v.value +'</div>';
+        })
+
+        document.querySelector(".content").innerHTML = _str;
+        var _pageDom = document.querySelectorAll(".page .btn");
+        _pageDom.forEach(function(v){
+            v.addEventListener("click",function(){
+                var page = this.innerText;
+                document.querySelectorAll(".content .current").forEach(function(v){
+                    console.log(v.classList)
+                    console.log(v.classList.values())
+                    v.classList.remove("current");
+                })
+                document.querySelectorAll(".content [page-key='"+ page +"']").forEach(function(v){
+                    v.classList.add("current");
+                })
+                
+            })
+        })
+    </script>
+</body>
+</html>
