@@ -173,7 +173,7 @@ pie.initConfig({
 			</figure>
 
 
-			<h2>setOption</h2>
+			<h2>render</h2>
 			<p>调用echarts的渲染功能 如果上面的result中已经有饼图信息 此方法不需要传参数</p>
 			<div class="bs-example">
 				<code>@param {Array} </code>
@@ -208,7 +208,7 @@ pie.initConfig({
 							}<br>
 						}<br>
 					})<br>
-					pie.setOption([[<br>
+					pie.render([[<br>
 						{value: 10509950, percent: "5452.00", name: "China EMS(L# *** *** *** CN)"},<br>
 						{value: 50540454,  name: "Post(L# *** *** *** CN)"},<br>
 						{value: 50540454,  name: "Tes(L# *** *** *** CN)"}
@@ -250,8 +250,8 @@ pie.initConfig({
 				</button>
 			<figure class="highlight">
 				pie.setColor(["#7fa1da","#6dc8d4","#7fdabd","#b2e9aa"]);<br>
-				//调用setOption方法进行渲染<br>
-				pie.setOption();
+				//调用render方法进行渲染<br>
+				pie.render();
 			</figure>
 
 			<h4>resize</h4>
@@ -270,11 +270,22 @@ pie.initConfig({
 			<p>切换图表的选中状态 <code>@param {String} name</code></p>
 			<div class="bs-example">
 				<div class="pie" pie-toggle>
-					
+
 				</div>
 				<button class="btn btn-default btn-success" onclick="toggle()">
 					切换选中状态
 				</button>
+			</div>
+			<figure class="highlight">
+				pie.toggleSelect();
+			</figure>
+
+			<h4>Demo</h4>
+			<p>切换图表的选中状态 <code>@param {String} name</code></p>
+			<div class="bs-example">
+				<div class="pie" pie-pie>
+
+				</div>
 			</div>
 			<figure class="highlight">
 				pie.toggleSelect();
@@ -298,7 +309,7 @@ pie.initConfig({
 				}
 			}
 		})
-		pie.setOption([[
+		pie.render([[
 			{value: 10509950, percent: "5452.00", name: "China EMS(L# *** *** *** CN)"},
 			{value: 50540454,  name: "Post(L# *** *** *** CN)"},
 			{value: 50540454,  name: "Tes(L# *** *** *** CN)"}
@@ -316,7 +327,7 @@ pie.initConfig({
 				}
 			}
 		})
-		pieColor.setOption([[
+		pieColor.render([[
 			{value: 10509950, percent: "5452.00", name: "China EMS(L# *** *** *** CN)"},
 			{value: 50540454,  name: "Post(L# *** *** *** CN)"},
 			{value: 50540454,  name: "Tes(L# *** *** *** CN)"}
@@ -327,7 +338,7 @@ pie.initConfig({
 			var color = _c === 0 ? ["#4caf50","#00bcd4","#f44336","#2196f3","#ff8c00","#9C27B0"]: ["#7fa1da","#6dc8d4","#7fdabd","#b2e9aa"];
 			_c = _c === 0 ? 1 : 0;
 			pieColor.setColor(color);
-			pieColor.setOption();
+			pieColor.render();
 		}
 
 		//切换状态
@@ -342,7 +353,7 @@ pie.initConfig({
 				}
 			}
 		})
-		pieToggle.setOption([[
+		pieToggle.render([[
 			{value: 10509950, percent: "5452.00", name: "China EMS(L# *** *** *** CN)"},
 			{value: 50540454,  name: "Post(L# *** *** *** CN)"},
 			{value: 50540454,  name: "Tes(L# *** *** *** CN)"}
@@ -351,6 +362,47 @@ pie.initConfig({
 		function toggle(){
 			pieToggle.toggleSelect("Tes(L# *** *** *** CN)");
 		}
+
+		var pie_pie = new YQEcharts.pie();
+		pie_pie.initConfig({
+			el:document.querySelector("[pie-pie]"),
+			g:{
+				enableDefaultTip:false,
+				extend:{
+					tooltip : {
+						trigger:'item',
+						formatter: "{a} <br/> {b} : {c} ({d}%)",
+					},
+					legend:{
+						type :"plain",
+						left:0,
+						data:["China EMS","Post","Tes"]
+					}
+				},
+				pie:{
+					type: 'pie',
+	                radius : '55%',
+	                center: ['50%', '60%'],
+	                label:{
+	                    normal:{
+	                        show:true,
+	                    }
+	                },
+	                itemStyle: {
+	                    emphasis: {
+	                        shadowBlur: 10,
+	                        shadowOffsetX: 0,
+	                        shadowColor: 'rgba(0, 0, 0, 0.5)'
+	                    }
+	                },
+				}
+			}
+		})
+		pie_pie.render([
+			[{value: 10509950, percent: "5452.00", name: "China EMS"},
+			{value: 50540454,  name: "Post"},
+			{value: 50540454,  name: "Tes"}]
+		])
 
 	</script>
 </body>
