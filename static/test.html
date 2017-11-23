@@ -11,9 +11,10 @@
 
     </div>
     <div class="msg"></div>
+    <img src="https://detail.tmall.com/img.alicdn.com/imgextra/i3/773582021/TB2Gyz6dBTH8KJjy0FiXXcRsXXa_!!773582021.jpg_60x60q90.jpg">
 </body>
 <script src="./html5media.min.js"></script>
-<script>
+<script type="text/javascript">
     var eTool = (function (doc) {
         var cw = window.innerWidth;
         var ch = window.innerHeight;
@@ -74,7 +75,7 @@
                 draw(this, canvas, cont2D,  _this.width,  _this.height);
             }, false);
         }
-        
+
 
         function cerateCanvas(w, h) {
             var cr = doc.createElement("canvas");
@@ -126,12 +127,14 @@
     })(document)
 
     eTool.init({
-        width:480,
-        height:320,
+        width:1080,
+        height:680,
+        framerate:30,
         duration:65
     },function(imgs){
         console.log(imgs)
         document.querySelector(".msg").innerHTML = JSON.stringify(imgs);
     });
 </script>
+<script type="text/javascript"></script>
 </html>
