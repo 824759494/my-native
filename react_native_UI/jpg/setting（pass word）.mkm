@@ -1,6 +1,0 @@
-<MKM version="2.0" imageFileUrl="file:///D:/work/react_native_UI/jpg/setting%ef%bc%88pass%20word%ef%bc%89.jpg">
-  <Marks>
-    <TextMark defaultDirection="9" direction="9" color="16711680" x="203" y="166" textMaxWidth="318" offsetX="25" offsetY="10" text="点击确定后如果手机和验证码输入错误，提示弄快从上往下移动，并提示“无该帐号信息”和“验证码错误”"/>
-    <TextMark defaultDirection="9" direction="9" color="16711680" x="424" y="319" textMaxWidth="100" offsetX="25" offsetY="10" text="初始状态为“获取验证码”，点击后变为倒计时"/>
-  </Marks>
-</MKM>

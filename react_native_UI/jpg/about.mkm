@@ -1,6 +1,0 @@
-<MKM version="2.0" imageFileUrl="file:///D:/work/react_native_UI/jpg/about.jpg">
-  <Marks>
-    <TextMark defaultDirection="9" direction="9" color="16711680" x="187" y="195" textMaxWidth="100" offsetX="25" offsetY="10" text="点击跳转到about（1）"/>
-    <TextMark defaultDirection="9" direction="9" color="16711680" x="144" y="288" textMaxWidth="100" offsetX="25" offsetY="10" text="点击跳转到about（2）"/>
-  </Marks>
-</MKM>

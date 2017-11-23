@@ -1,5 +1,0 @@
-<MKM version="2.0" imageFileUrl="file:///D:/work/react_native_UI/jpg/verification%ef%bc%88phone%ef%bc%89.jpg">
-  <Marks>
-    <TextMark defaultDirection="9" direction="9" color="16711680" x="205" y="167" textMaxWidth="100" offsetX="25" offsetY="10" text="当验证码错误点击确定后出现提示信息"/>
-  </Marks>
-</MKM>

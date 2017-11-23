@@ -1,7 +1,0 @@
-<MKM version="2.0" imageFileUrl="file:///D:/work/react_native_UI/jpg/impression.jpg">
-  <Marks>
-    <TextMark defaultDirection="9" direction="9" color="16711680" x="56" y="198" textMaxWidth="383" offsetX="25" offsetY="10" text="点击“正面”和“负面”时这条线移动到相应的文字下面"/>
-    <TextMark defaultDirection="9" direction="9" color="16711680" x="45" y="263" textMaxWidth="100" offsetX="25" offsetY="10" text="点击头像跳转到他的个人信息界面"/>
-    <TextMark defaultDirection="9" direction="9" color="16711680" x="263" y="316" textMaxWidth="239" offsetX="25" offsetY="10" text="这里的内容来自calendar 界面中发出的申请添加的印象，psd里面有发出的申请"/>
-  </Marks>
-</MKM>

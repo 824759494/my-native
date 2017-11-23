@@ -1,7 +1,0 @@
-<MKM version="2.0" imageFileUrl="file:///D:/work/react_native_UI/jpg/forget%ef%bc%881136%ef%bc%89.jpg">
-  <Marks>
-    <TextMark defaultDirection="10" direction="10" color="16711680" x="214" y="158" textMaxWidth="280" offsetX="53" offsetY="28" text="当手机和验证码输入错误时，提示从上向下移动出来，并提示该帐号不存在和验证码错误"/>
-    <TextMark defaultDirection="6" direction="6" color="16711680" x="449" y="353" textMaxWidth="220" offsetX="68" offsetY="21" text="初始状态为获取验证码，点击后开始一分钟倒计时"/>
-    <TextMark defaultDirection="9" direction="9" color="16711680" x="301" y="572" textMaxWidth="250" offsetX="25" offsetY="10" text="这里应该为确定，当输入全部正确时点击跳转到home界面，当输入错误时，点击弹出提示内容"/>
-  </Marks>
-</MKM>

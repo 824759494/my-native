@@ -1,6 +1,0 @@
-<MKM version="2.0" imageFileUrl="file:///D:/work/react_native_UI/jpg/setting.jpg">
-  <Marks>
-    <TextMark defaultDirection="9" direction="9" color="16711680" x="258" y="184" textMaxWidth="100" offsetX="25" offsetY="10" text="点击跳转到setting（msg）"/>
-    <TextMark defaultDirection="9" direction="9" color="16711680" x="252" y="294" textMaxWidth="100" offsetX="25" offsetY="10" text="点击跳转到password  界面"/>
-  </Marks>
-</MKM>

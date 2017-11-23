@@ -1,7 +1,0 @@
-<MKM version="2.0" imageFileUrl="file:///D:/work/react_native_UI/jpg/msg.jpg">
-  <Marks>
-    <TextMark defaultDirection="10" direction="10" color="16711680" x="44" y="85" textMaxWidth="100" offsetX="31" offsetY="20" text="点击跳转到fllow界面"/>
-    <TextMark defaultDirection="9" direction="5" color="16711680" x="561" y="176" textMaxWidth="100" offsetX="25" offsetY="10" text="这里是最后一次消息的时间"/>
-    <TextMark defaultDirection="9" direction="9" color="16711680" x="313" y="255" textMaxWidth="100" offsetX="25" offsetY="10" text="点击这里任何区域都跳转到chat界面"/>
-  </Marks>
-</MKM>

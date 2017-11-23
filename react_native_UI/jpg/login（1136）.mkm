@@ -1,9 +1,0 @@
-<MKM version="2.0" imageFileUrl="file:///D:/work/react_native_UI/jpg/login%ef%bc%881136%ef%bc%89.jpg">
-  <Marks>
-    <TextMark defaultDirection="10" direction="10" color="16711680" x="254" y="151" textMaxWidth="264" offsetX="47" offsetY="35" text="当输入错误时提示模块从上向下滑动这个位置，当手机/邮箱错误时提示该帐号不存在，当密码错误时提示密码错误"/>
-    <TextMark defaultDirection="10" direction="10" color="16711680" x="170" y="426" textMaxWidth="286" offsetX="62" offsetY="34" text="登录成功后，如果是第一次登陆转跳到基本信息界面，如果不是，跳转到home界面。不成功出现提示模块"/>
-    <TextMark defaultDirection="10" direction="10" color="16711680" x="49" y="533" textMaxWidth="100" offsetX="27" offsetY="20" text="点击跳转到注册界面"/>
-    <TextMark defaultDirection="6" direction="6" color="16711680" x="562" y="531" textMaxWidth="100" offsetX="30" offsetY="24" text="点击跳转到忘记密码页面&#xD;"/>
-    <TextMark defaultDirection="9" direction="9" color="16711680" x="340" y="672" textMaxWidth="185" offsetX="25" offsetY="10" text="点击跳转到微信授权，授权成功。如果是第一次登陆转跳到基本信息界面，如果不是，跳转到home界面"/>
-  </Marks>
-</MKM>
