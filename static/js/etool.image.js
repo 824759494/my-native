@@ -191,7 +191,7 @@ window.EtoolImage = (function($,win,doc){
 	$(document).on("etool.getBlob",function(e,opts){
 			var dataURL = opts.self.canvas.toBlob(function(blob){
 				opts.self.blobDatas.push(blob);
-			opts.self.formdata.append(opts.src,blob);
+			opts.self.formdata.append(opts.src,blob,getType(opts.src));
 			opts.cb();
 			},getType(opts.src),opts.self.config.quality);
 	});
