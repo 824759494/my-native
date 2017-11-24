@@ -77,8 +77,8 @@ window.EtoolImage = (function($,win,doc){
 
 						//回调出去放给用户
 						self.cb( self.type === "getBase64" ?
-							(self.config.enableForm ? self.formdata : self.base64Datas) :
-							(self.config.enableForm ? self.formdata : self.blobDatas)
+							(self.config.enableForm ? ([self.formdata].slice())[0] : self.base64Datas.slice()) :
+							(self.config.enableForm ? ([self.formdata].slice())[0] : self.blobDatas.slice())
 						)
 						//重置全局的参数
 						self.ind 			= 0;
