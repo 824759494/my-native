@@ -28,7 +28,8 @@ window.EtoolImage = (function($,win,doc){
 			quality  	 : 1,
 			w 			 : "auto",
 			h 			 : "auto",
-			enableForm 	 : true
+			enableForm 	 : true,
+			imgFn		 : ""
 		}
 
 		//实例下的Image对象 并且设置跨域
@@ -72,6 +73,23 @@ window.EtoolImage = (function($,win,doc){
 				src 	: self.image.src,
 				cb 		: function(){
 					self.ind ++;
+					if(self.imgFn.constructor === Function){
+						var tempFormData = new FormData();
+						var _index = 0;
+						if(self.config.enableForm){
+							if(self.type === "getBase64"){
+								tempFormData.append(self.image.src,self.base64Datas.slice(self.base64Datas.length - 1));
+								_index = self.base64Datas.length - 1;
+							}else{
+								tempFormData.append(self.image.src,self.blobDatas.slice(self.blobDatas.length - 1));
+								_index = self.blobDatas.length - 1;
+							}
+							self.imgFn(tempFormData,);
+						}else{
+							//每一个img处理后的回调函数便于用户操作
+							self.imgFn(self.type === "getBase64" ? self.base64Datas.slice(self.base64Datas.length - 1) : self.blobDatas.slice(self.blobDatas.length - 1), self.type === "getBase64" ? self.base64Datas.length - 1 : self.blobDatas.length - 1);
+						}
+					}
 					//判断异步任务是否结束
 					if(self.ind === self.list.length) {
 
