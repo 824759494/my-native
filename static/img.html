@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>img图片读取并上传</title>
+</head>
+<body>
+	<div id="img"></div>
+	<script type="text/javascript">
+
+		var imgs = ["https://img.alicdn.com/imgextra/i4/2616970884/TB2aAG1tYtlpuFjSspfXXXLUpXa_!!2616970884.jpg_430x430q90.jpg","https://img.alicdn.com/imgextra/i4/2616970884/TB2aAG1tYtlpuFjSspfXXXLUpXa_!!2616970884.jpg_430x430q90.jpg","https://img.alicdn.com/imgextra/i4/2616970884/TB2aAG1tYtlpuFjSspfXXXLUpXa_!!2616970884.jpg_430x430q90.jpg","https://img.alicdn.com/imgextra/i4/2616970884/TB2aAG1tYtlpuFjSspfXXXLUpXa_!!2616970884.jpg_430x430q90.jpg","https://img.alicdn.com/imgextra/i4/2616970884/TB2aAG1tYtlpuFjSspfXXXLUpXa_!!2616970884.jpg_430x430q90.jpg"];
+
+		var cont = document.getElementById("img");
+        var canvas = document.createElement('canvas');
+        console.log(canvas)
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            cont.appendChild(canvas);
+
+		var ctx = canvas.getContext("2d");
+
+		var form = new FormData(),ind = 0;
+
+		function getBlob(url,w,h){
+		    var  reader    = new FileReader();
+		    var img = new Image();
+		    //reader.readAsDataURL(url);
+
+		    img.onload = function(e) {
+	            ctx.clearRect(0,0,w,h);
+	            ctx.drawImage(img, 0, 0, w, h);
+	            canvas.toBlob(function(blob){
+		    		console.log("二进制：",blob)
+	            	form.append("img" + ind,blob);
+	            })
+	            ind++;
+		    }
+		    img.src = url;
+		}
+
+		imgs.forEach(function(v){
+			getBlob(v,canvas.width,canvas.height);
+		})
+		form.append("len",ind + 1);
+
+		console.log(form)
+
+
+		//获取图片的Blob值
+		function getImageBlob(url, cb) {
+		    var xhr          = new XMLHttpRequest();
+		    xhr.open("get", url, true);
+		    xhr.responseType = "blob";
+		    xhr.onload       = function() {
+		        if (this.status == 200) {
+		            if(cb) cb(this.response);
+		        }
+		    };
+		    xhr.send();
+		}
+
+
+		function preView(url){
+		    var reader    = new FileReader();
+
+		    getImageBlob( url , function(blob){
+		        reader.readAsDataURL(blob);
+		    });
+
+		    reader.onload = function(e) {
+		    	console.log(e.target)
+		    	debugger
+		        var img = document.createElement("img");
+		        img.src = e.target.result;
+		        document.body.appendChild(img);
+		    }
+		}
+
+
+		preView("file:///D:/nodeSoft/my-native/881223.jpg")
+	</script>
+</body>
+</html>
