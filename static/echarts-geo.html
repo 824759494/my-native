@@ -21,6 +21,35 @@
     <script src="./js/common.js"></script>
     <script src="./js/yq-echarts-map.js"></script>
     <script>
+
+        function getBlobBydataURI(dataURI,type) { 
+            var binary = atob(dataURI.split(',')[1]); 
+            var array = []; 
+            for(var i = 0; i < binary.length; i++) { 
+                array.push(binary.charCodeAt(i)); 
+            } 
+            return new Blob([new Uint8Array(array)], {type:type }); 
+        }
+
+        /**  
+         * 将以base64的图片url数据转换为Blob  
+         * @param urlData  
+         *            用url方式表示的base64图片数据  
+         */  
+        function convertBase64UrlToBlob(urlData){  
+            
+            var bytes=window.atob(urlData.split(',')[1]);        //去掉url的头，并转换为byte  
+            
+            //处理异常,将ascii码小于0的转换为大于0  
+            var ab = new ArrayBuffer(bytes.length);  
+            var ia = new Uint8Array(ab);  
+            for (var i = 0; i < bytes.length; i++) {  
+                ia[i] = bytes.charCodeAt(i);  
+            }  
+        
+            return new Blob( [ab] , {type : 'image/png'});  
+        } 
+
         var chart = echarts.init(document.getElementById('my-geo'));
 
         var features = YQmapPath.features;
@@ -29,11 +58,14 @@
 
             var name = features[i].properties.name;
             var ffix = features[i].id;
-            map.push({
-                "name": name , "ffix": ffix
-            });
+            if(features[i].hasOwnProperty("key")){
+                map.push({
+                    "name": name , key : features[i].key,ffix : ffix
+                });
+            }
+            
         };
-        console.log(map)
+        console.log("输出一份带key的name：",map)
 
         var __mapJson = VResGCountry.items,
         _mapKeyJson = [],_mapKeyArrs = [];
@@ -49,18 +81,25 @@
                 }
             }
         }
-        var m = 0,_isArrs = [];
+        var _common = [];
+        var _map = map.slice();
+        var m = 0,_isArrs = [],_index = 0;
         map.forEach(function(v,i,arr){
             for(var k = 0;k< mapdatas.length; k++){
                 var _temp = mapdatas[k];
                 if(v.ffix === _temp.value){
                     m ++;
+                    _common.push({name:v.name,ffix:v.ffix,idt:_temp.name})
                     jsonKey(v,_temp.name);
                     mapdatas.splice(k,1)
+                    _map.splice(_index,1)
+                    _index--;
                     break;
                 }
             }
+            _index++;
         })
+        console.log("对比数据" , _common)
         console.log("等于的次数:",m)
         
         console.log(_mapKeyJson)
@@ -99,6 +138,7 @@
             }
         }
         console.log(_echartsData)
+        _echartsData.push({name:"中国",value:787789})
         console.log(_dataRSplitList)
         echarts.registerMap('world2', YQmapPath);
         option = {
@@ -167,7 +207,7 @@
             // 数据的 index，如果不指定也可以通过 name 属性根据名称指定数据
             //dataIndex?: number,
             // 可选，数据名称，在有 dataIndex 的时候忽略
-            //name : "China"
+            name : "South Sudan"
         })
     </script>
 </body>

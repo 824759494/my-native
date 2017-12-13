@@ -1,6 +1,0 @@
-<MKM version="2.0" imageFileUrl="file:///D:/work/react_native_UI/jpg/setting%ef%bc%88msg%ef%bc%89.jpg">
-  <Marks>
-    <TextMark defaultDirection="9" direction="5" color="16711680" x="563" y="192" textMaxWidth="100" offsetX="25" offsetY="10" text="点击按钮左右滑动，当前为开打状态"/>
-    <TextMark defaultDirection="9" direction="5" color="16711680" x="538" y="345" textMaxWidth="100" offsetX="25" offsetY="10" text="这个为关闭状态"/>
-  </Marks>
-</MKM>

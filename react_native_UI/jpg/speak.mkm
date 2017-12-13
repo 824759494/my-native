@@ -1,6 +1,0 @@
-<MKM version="2.0" imageFileUrl="file:///D:/work/react_native_UI/jpg/speak.jpg">
-  <Marks>
-    <TextMark defaultDirection="9" direction="9" color="16711680" x="53" y="633" textMaxWidth="100" offsetX="25" offsetY="10" text="点击话筒后的界面 "/>
-    <TextMark defaultDirection="9" direction="9" color="16711680" x="306" y="923" textMaxWidth="236" offsetX="25" offsetY="10" text="上滑取消发送语音，上滑时垃圾桶变为红色，psd里有体现，说话时话筒两边发出左右闪动的效果"/>
-  </Marks>
-</MKM>

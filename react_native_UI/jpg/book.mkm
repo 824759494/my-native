@@ -1,5 +1,0 @@
-<MKM version="2.0" imageFileUrl="file:///D:/work/react_native_UI/jpg/book.jpg">
-  <Marks>
-    <TextMark defaultDirection="9" direction="9" color="16711680" x="197" y="154" textMaxWidth="338" offsetX="25" offsetY="10" text="这个界面可以从profile(viewer)  里面的个人信息喜欢的书籍进来，但是从访客进来后右上角没有添加按钮和书右下方的删除按钮。也可以从profile(my)  里面的个人信息里喜欢的书籍进入。&#xD;点击这本书的整个区域链接到豆瓣的相关书籍介绍"/>
-  </Marks>
-</MKM>

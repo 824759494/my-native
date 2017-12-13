@@ -1,8 +1,0 @@
-<MKM version="2.0" imageFileUrl="file:///D:/work/react_native_UI/jpg/discover.jpg">
-  <Marks>
-    <TextMark defaultDirection="9" direction="9" color="16711680" x="47" y="83" textMaxWidth="100" offsetX="57" offsetY="21" text="点击跳转到post界面"/>
-    <TextMark defaultDirection="9" direction="5" color="16711680" x="561" y="77" textMaxWidth="100" offsetX="25" offsetY="10" text="这里的交互和home界面一样"/>
-    <TextMark defaultDirection="9" direction="5" color="16711680" x="527" y="180" textMaxWidth="100" offsetX="25" offsetY="10" text="这里是发布的时间"/>
-    <TextMark defaultDirection="9" direction="5" color="16711680" x="566" y="534" textMaxWidth="100" offsetX="25" offsetY="10" text="点击跳转到share界面 "/>
-  </Marks>
-</MKM>

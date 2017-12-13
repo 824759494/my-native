@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>图片上传</title>
+</head>
+<body>
+
+	<script src="http://code.jquery.com/jquery-2.2.4.min.js"></script>
+	<script src="js/etool.image.js"></script>
+	<script type="text/javascript">
+
+		var to = new Etool.Image({
+			enableForm : true //开启formdata也就是ajax上传的方案
+		});
+		var lists = ["https://gd2.alicdn.com/imgextra/i1/272364127/TB2gCbus3JkpuFjSszcXXXfsFXa_!!272364127.png_400x400.jpg_.webp","https://gd2.alicdn.com/imgextra/i1/272364127/TB2gCbus3JkpuFjSszcXXXfsFXa_!!272364127.png_400x400.jpg_.webp","https://gd2.alicdn.com/imgextra/i1/272364127/TB2gCbus3JkpuFjSszcXXXfsFXa_!!272364127.png_400x400.jpg_.webp","https://gd2.alicdn.com/imgextra/i1/272364127/TB2gCbus3JkpuFjSszcXXXfsFXa_!!272364127.png_400x400.jpg_.webp","https://gd2.alicdn.com/imgextra/i1/272364127/TB2gCbus3JkpuFjSszcXXXfsFXa_!!272364127.png_400x400.jpg_.webp"];
+		to.getBase64(lists,function(v){
+			console.log("返回的数据：",v)
+			v.append("id","id11111111");
+			v.append("name","upimage");
+			//获取ajax配置信息
+			$.ajax(to.getAjaxOption(v,{
+				url : "上传地址",
+				success:function(result){
+
+				}
+			})
+			)
+			//console.log(v.get(lists[0]))
+		})
+
+		to.getBlob(lists,function(v){
+			console.log("返回的数据：",v)
+			//console.log(v.get(lists[0]))
+		})
+	</script>
+</body>
+</html>

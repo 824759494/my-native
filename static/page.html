@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>分页</title>
+    <style>
+        .btn,#page .page{
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            line-height: 20px;
+            padding: 10px;
+            box-shadow: 0 0 1px rgba(0,0,0,.1);
+            text-align: center;
+            border: 1px solid #e0e0e0;
+            cursor: pointer;
+            margin-bottom: 10px;
+        }
+        .page-content{
+            display: none;
+        }
+        .page-content.current{
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="content">
+
+        </div>
+        <div class="page">
+            <div class="btn">1</div>
+            <div class="btn">2</div>
+            <div class="btn">3</div>
+            <div class="btn">4</div>
+        </div>
+    </div>
+	<div id="page">
+		<div class="container-page">
+			<div class="page" current="1" >1</div>
+			<div class="page" current="2" >2</div>
+			<div class="page" current="3" >3</div>
+			<div class="page" current="4" >4</div>
+			<div class="page" current="5" >5</div>
+		</div>
+	</div>
+
+    <script src="http://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+	<script type="text/javascript">
+		window.Etool = {};
+		Etool.Page = (function($){
+
+			var _this = function (){
+				this.defaults = {
+					elem : $("#page"),
+					handelNames : {
+						"etool.page.click" : $.noop
+					}
+				}
+			};
+
+			_this.prototype = {
+
+				init : function(){
+					this.addEvent();
+				},
+
+				addEvent : function(){
+					var self = this;
+					self.defaults.elem.find(".container-page>.page").off("click");
+					self.defaults.elem.find(".container-page>.page").on("click",function(){
+						var page = $(this).attr("current");
+						self.defaults.elem.trigger("etool.page.click",{
+							current : page,
+							elem : $(this)
+						})
+					});
+				},
+
+				on : function(type,handle){
+					if(this.defaults.handelNames[type]){
+						console.log(this.defaults.elem[type])
+						this.defaults.elem.on(type,function(e,params){
+							e.stopPropagation();
+							handle && handle.constructor === Function ? handle(e,params) : $.noop;
+						});
+					}
+				}
+			}
+
+			return _this;
+
+		})(jQuery);
+
+		var mPage = new Etool.Page();
+
+		mPage.init();
+
+		mPage.on("etool.page.click",function(e,params){
+			console.log(params);
+		})
+
+		mPage.on("etool.page.click",function(e,params){
+			console.log("触发：" ,params);
+		})
+	</script>
+    <script>
+
+        var _result = [];
+        for(var i = 0;i < 20; i++){
+            _result.push({name:"Morris" + Math.round(Math.random() * 100),value : Math.round(Math.random() * 120) });
+        }
+        var _str = "",_page = 0,_pageSize = 5,_current = 1;
+        _result.forEach(function(v,i){
+            if(i % _pageSize === 0){
+                _page++;
+            }
+            _str += '<div class="page-content '+ (_current === _page ? 'current':'') +'" page-key="'+ _page +'">姓名：'+ v.name +'    分数：'+ v.value +'</div>';
+        })
+
+        document.querySelector(".content").innerHTML = _str;
+        var _pageDom = document.querySelectorAll(".page .btn");
+        _pageDom.forEach(function(v){
+            v.addEventListener("click",function(){
+                var page = this.innerText;
+                document.querySelectorAll(".content .current").forEach(function(v){
+                    console.log(v.classList)
+                    console.log(v.classList.values())
+                    v.classList.remove("current");
+                })
+                document.querySelectorAll(".content [page-key='"+ page +"']").forEach(function(v){
+                    v.classList.add("current");
+                })
+
+            })
+        })
+    </script>
+</body>
+</html>

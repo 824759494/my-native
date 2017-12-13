@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>饼图组件说明</title>
+	<link rel="stylesheet" type="text/css" href="./bootstrap-3.3.7-dist/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="./bootstrap-3.3.7-dist/css/doc.css">
+	<style>
+		.pie{
+			height: 300px;
+		}
+		.highlight code{
+			color: #333;
+		}
+	</style>
+</head>
+<body>
+	<div class="panel">
+		<div class="panel-body">
+
+			<h2>实例</h2>
+			<p>初始化<code>pie</code>实例</p>
+			<!-- <div class="bs-example">
+				var pie = new YQEcharts.pie();
+			</div> -->
+			<figure class="highlight">
+				<pre>
+					var pie = new YQEcharts.pie(); 
+					or
+					var pie = new YQEchartsPie();
+				</pre>
+			</figure>
+
+
+			<h2>initConfig</h2>
+			<p>根据基础<code>param</code>配置图表</p>
+			<div class="bs-example">
+				<code>@param {Object}</code> <span>内置一个默认的Object参数对象</span>
+				<table class="table table-bordered">
+					<thead>
+						<tr>
+							<th>名称</th>
+							<th>类型</th>
+							<th>默认值</th>
+							<th>描述</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<th scope="row">el</th>
+							<td>js Dom</td>
+							<td>document.querySelector("")</td>
+							<td>接收一个js的dom对象为echarts初始化的实例所需的元素，必须具备高度</td>
+						</tr>
+						<tr>
+							<th scope="row">g</th>
+							<td>Object</td>
+							<td>
+								<table class="table table-bordered">
+									<thead>
+										<tr>
+											<th>名称</th>
+											<th>类型</th>
+											<th>默认</th>
+											<th>描述</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td>enableDefaultTip</td>
+											<td>Boolean</td>
+											<td>true</td>
+											<td>是否开启tooltip提示formatter回调，默认：<code>true</code></td>
+										</tr>
+										<tr>
+											<td>tooltip</td>
+											<td>Function</td>
+											<td>""</td>
+											<td>tooltip提示formatter回调 <code>enableDefaultTip</code>为<code>true</code>时调用</td>
+										</tr>
+										<tr>
+											<td>enableGPie</td>
+											<td>Boolean</td>
+											<td>true</td>
+											<td>是否饼图全局的series基础配置信息默认：<code>true</code></td>
+										</tr>
+										<tr>
+											<td>pie</td>
+											<td>Object</td>
+											<td style="width:400px;">
+												<code class="language-javascript">
+												{
+													type: 'pie',
+													radius : '65%',
+													center: ['50%', '50%'],
+													selectedMode: 'single',
+													selectedOffset: 30,
+													label:{
+														normal:{
+															show:false,
+														}
+													},
+													itemStyle: {
+														normal:{
+															shadowBlur: 20,
+															shadowOffsetX: 0,
+															shadowColor: 'rgba(0, 0, 0, 0.4)'
+														},
+														emphasis: {
+															shadowBlur: 20,
+															shadowOffsetX: 0,
+															shadowColor: 'rgba(0, 0, 0, 0.4)'
+														}
+													},
+													data:[]
+												}
+												</code>
+											</td>
+											<td>tooltip提示formatter回调 <code>enableDefaultTip</code>为<code>true</code>时调用</td>
+										</tr>
+										<tr>
+											<td>extend</td>
+											<td>Object</td>
+											<td>{
+													color:_colors
+												}
+											</td>
+											<td>图表的扩展设置同echarts的option设置 <a href="http://echarts.baidu.com/option.html" target="_blank">option</a></td>
+										</tr>
+									</tbody>
+								</table>
+							</td>
+							<td>一些基础的通用配置信息，可覆盖</td>
+						</tr>
+						<tr>
+							<th scope="row">result</th>
+							<td>Array</td>
+							<td>[]</td>
+							<td>接收一个echarts的series数组
+								<h4>格式如下</h4>
+								<code>
+									[{
+										type:"pie",
+										data:[],
+										....
+									}]
+								</code>
+								<br>
+								<a href="http://echarts.baidu.com/option.html#series-pie" target="_blank">series详情</a>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<figure class="highlight">
+				<pre>
+<code class="language-javascript" data-lang="javascript">
+var pie = new YQEcharts.pie();
+
+pie.initConfig({
+	g:{
+		tooltip : {
+			formatter: function (params, ticket, callback) {
+				return '&lt;div&gt;' + params.name + '&lt;/div&gt;';
+			}
+		},
+		extend:{
+			color:["#000"]
+		}
+	}
+})
+</code>
+				</pre>
+			</figure>
+
+
+			<h2>render</h2>
+			<p>调用echarts的渲染功能 如果上面的result中已经有饼图信息 此方法不需要传参数</p>
+			<div class="bs-example">
+				<code>@param {Array} </code>
+				<p>每一个data都是一个饼图</p>
+				<pre>
+[[{carrier: 3013, id: -564098106, count: 10509950, percent: "5452.00", name: "China EMS(L# *** *** *** CN)", …},
+{carrier: 3011, id: -669999156, count: 5124095, percent: "2658.00", name: "China Post(R# *** *** *** CN)", …},...],data,data,...] 
+				</pre>
+				或
+				<p>每一个对象就是一个饼图的配置信息</p>
+				<pre>
+[{
+  type:"pie",
+  data:[{carrier: 3013, id: -564098106, count: 10509950, percent: "5452.00", name: "China EMS(L# *** *** *** CN)", …},
+	{carrier: 3011, id: -669999156, count: 5124095, percent: "2658.00", name: "China Post(R# *** *** *** CN)", …},...]
+},
+{},...]
+				</pre>
+			</div>
+			<figure class="highlight">
+				<pre>
+					var pie = new YQEcharts.pie();<br>
+					pie.initConfig({<br>
+						g:{<br>
+							tooltip : {<br>
+								formatter: function (params, ticket, callback) {<br>
+									return '&lt;div&gt;' + params.name + '&lt;/div&gt;';<br>
+								}<br>
+							},<br>
+							extend:{<br>
+								color:["#000"]<br>
+							}<br>
+						}<br>
+					})<br>
+					pie.render([[<br>
+						{value: 10509950, percent: "5452.00", name: "China EMS(L# *** *** *** CN)"},<br>
+						{value: 50540454,  name: "Post(L# *** *** *** CN)"},<br>
+						{value: 50540454,  name: "Tes(L# *** *** *** CN)"}
+					]])<br>
+				</pre>
+			</figure>
+
+			<h2>渲染</h2>
+			<p>渲染一个饼图出来 <code>代码如上</code> </p>
+			<div class="bs-example">
+				<div class="pie">
+
+				</div>
+			</div>
+			<figure class="highlight">
+				<code>
+				.pie{
+				height: 300px;
+				}
+				</code>
+			</figure>
+		</div>
+		
+		<div class="panel-body">
+			<h4>getInitEchart</h4>
+			<p>获取echarts的实例对象</p>
+			<figure class="highlight">
+				var ec = pie.getInitEchart();
+			</figure>
+
+			<h4>setColor</h4>
+			<p>设置echarts实例的颜色组</p>
+			<div class="bs-example">
+				<div class="pie" pie-color>
+					
+				</div>
+				<button class="btn btn-default btn-success" onclick="setColor()">
+					设置颜色
+				</button>
+			<figure class="highlight">
+				pie.setColor(["#7fa1da","#6dc8d4","#7fdabd","#b2e9aa"]);<br>
+				//调用render方法进行渲染<br>
+				pie.render();
+			</figure>
+
+			<h4>resize</h4>
+			<p>重置图表的大小</p>
+			<figure class="highlight">
+				pie.resize();
+			</figure>
+			
+			<h4>clear</h4>
+			<p>清空图表信息</p>
+			<figure class="highlight">
+				pie.clear();
+			</figure>
+			
+			<h4>toggleSelect</h4>
+			<p>切换图表的选中状态 <code>@param {String} name</code></p>
+			<div class="bs-example">
+				<div class="pie" pie-toggle>
+
+				</div>
+				<button class="btn btn-default btn-success" onclick="toggle()">
+					切换选中状态
+				</button>
+			</div>
+			<figure class="highlight">
+				pie.toggleSelect();
+			</figure>
+
+			<h4>Demo</h4>
+			<p>切换图表的选中状态 <code>@param {String} name</code></p>
+			<div class="bs-example">
+				<div class="pie" pie-pie>
+
+				</div>
+			</div>
+			<figure class="highlight">
+				pie.toggleSelect();
+			</figure>
+		</div>
+	</div>
+	</div>
+	<script src="http://code.jquery.com/jquery-2.2.4.min.js"></script>
+	<script src="./js/echarts.min.js"></script>
+	<script src="./js/yq-echarts-pie.js"></script>
+	<script src="./bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+	<script>
+		var pie = new YQEcharts.pie();
+		pie.initConfig({
+			el:document.querySelector(".pie"),
+			g:{
+				tooltip : {
+					formatter: function (params, ticket, callback) {
+						return '<div>' + params.name + 'div';
+					}
+				}
+			}
+		})
+		pie.render([[
+			{value: 10509950, percent: "5452.00", name: "China EMS(L# *** *** *** CN)"},
+			{value: 50540454,  name: "Post(L# *** *** *** CN)"},
+			{value: 50540454,  name: "Tes(L# *** *** *** CN)"}
+		]])
+
+		//颜色切换
+		var pieColor = new YQEcharts.pie();
+		pieColor.initConfig({
+			el:document.querySelector("[pie-color]"),
+			g:{
+				tooltip : {
+					formatter: function (params, ticket, callback) {
+						return '<div>' + params.name + 'div';
+					}
+				}
+			}
+		})
+		pieColor.render([[
+			{value: 10509950, percent: "5452.00", name: "China EMS(L# *** *** *** CN)"},
+			{value: 50540454,  name: "Post(L# *** *** *** CN)"},
+			{value: 50540454,  name: "Tes(L# *** *** *** CN)"}
+		]])
+
+		var _c = 0;
+		function setColor(){
+			var color = _c === 0 ? ["#4caf50","#00bcd4","#f44336","#2196f3","#ff8c00","#9C27B0"]: ["#7fa1da","#6dc8d4","#7fdabd","#b2e9aa"];
+			_c = _c === 0 ? 1 : 0;
+			pieColor.setColor(color);
+			pieColor.render();
+		}
+
+		//切换状态
+		var pieToggle = new YQEcharts.pie();
+		pieToggle.initConfig({
+			el:document.querySelector("[pie-toggle]"),
+			g:{
+				tooltip : {
+					formatter: function (params, ticket, callback) {
+						return '<div>' + params.name + 'div';
+					}
+				}
+			}
+		})
+		pieToggle.render([[
+			{value: 10509950, percent: "5452.00", name: "China EMS(L# *** *** *** CN)"},
+			{value: 50540454,  name: "Post(L# *** *** *** CN)"},
+			{value: 50540454,  name: "Tes(L# *** *** *** CN)"}
+		]])
+
+		function toggle(){
+			pieToggle.toggleSelect("Tes(L# *** *** *** CN)");
+		}
+
+		var pie_pie = new YQEcharts.pie();
+		pie_pie.initConfig({
+			el:document.querySelector("[pie-pie]"),
+			g:{
+				enableDefaultTip:false,
+				extend:{
+					tooltip : {
+						trigger:'item',
+						formatter: "{a} <br/> {b} : {c} ({d}%)",
+					},
+					legend:{
+						type :"plain",
+						left:0,
+						data:["China EMS","Post","Tes"]
+					}
+				},
+				pie:{
+					type: 'pie',
+	                radius : '55%',
+	                center: ['50%', '60%'],
+	                label:{
+	                    normal:{
+	                        show:true,
+	                    }
+	                },
+	                itemStyle: {
+	                    emphasis: {
+	                        shadowBlur: 10,
+	                        shadowOffsetX: 0,
+	                        shadowColor: 'rgba(0, 0, 0, 0.5)'
+	                    }
+	                },
+				}
+			}
+		})
+		pie_pie.render([
+			[{value: 10509950, percent: "5452.00", name: "China EMS"},
+			{value: 50540454,  name: "Post"},
+			{value: 50540454,  name: "Tes"}]
+		])
+
+	</script>
+</body>
+</html>

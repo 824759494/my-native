@@ -1,5 +1,0 @@
-<MKM version="2.0" imageFileUrl="file:///D:/work/react_native_UI/jpg/verification%ef%bc%88email%ef%bc%89.jpg">
-  <Marks>
-    <TextMark defaultDirection="9" direction="9" color="16711680" x="150" y="219" textMaxWidth="100" offsetX="25" offsetY="10" text="输入邮箱后点击获取验证码，往这个邮箱发送一条验证信息"/>
-  </Marks>
-</MKM>

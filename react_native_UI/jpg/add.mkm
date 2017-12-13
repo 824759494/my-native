@@ -1,9 +1,0 @@
-<MKM version="2.0" imageFileUrl="file:///D:/work/react_native_UI/jpg/add.jpg">
-  <Marks>
-    <TextMark defaultDirection="9" direction="5" color="16711680" x="571" y="849" textMaxWidth="100" offsetX="25" offsetY="10" text="点击加号后的界面显示"/>
-    <TextMark defaultDirection="9" direction="9" color="16711680" x="96" y="983" textMaxWidth="100" offsetX="25" offsetY="10" text="点击从手机相册选择照片"/>
-    <TextMark defaultDirection="9" direction="9" color="16711680" x="295" y="985" textMaxWidth="100" offsetX="25" offsetY="10" text="点击发送位置"/>
-    <TextMark defaultDirection="9" direction="9" color="16711680" x="501" y="975" textMaxWidth="100" offsetX="25" offsetY="10" text="点击跳转到business card  界面"/>
-    <TextMark defaultDirection="9" direction="9" color="16711680" x="72" y="857" textMaxWidth="100" offsetX="25" offsetY="10" text="点击展开speak界面&#xD;"/>
-  </Marks>
-</MKM>
